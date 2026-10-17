@@ -1,0 +1,32 @@
+export const dreamPackets = [
+  {
+    id: 'dream-1',
+    name: 'Flying Over Cotton Clouds',
+    sender: 'Sleepy Bear in Bedroom #4',
+    frequency: '432 Hz',
+    payload: 'Cotton candy mist, gravity reduced by 90%',
+    color: '#F7D6E0',
+    stars: 5,
+    hops: ['Moonbeam Relay', 'Little Dipper Gate', 'Pillow Cloud Terminal'],
+  },
+  {
+    id: 'dream-2',
+    name: 'The Endless Hot Cocoa River',
+    sender: 'Tired Puppy on Rug',
+    frequency: '528 Hz',
+    payload: 'Warm marshmallows, gentle whirlpools, cookie boats',
+    color: '#FCE7A2',
+    stars: 6,
+    hops: ['Starlight Lighthouse', 'Cinnamon Cloud Bank', 'Dreamer Headset'],
+  },
+  {
+    id: 'dream-3',
+    name: 'Unicorn Starlight Carousel',
+    sender: 'Curious Dreamer in Attic',
+    frequency: '396 Hz',
+    payload: 'Soft chime melodies, slow gentle spinning, pastel ribbons',
+    color: '#D8C5E5',
+    stars: 7,
+    hops: ['Music Box Relay', 'Pegasus Waypoint', 'Bedroom Window sill'],
+  },
+];
