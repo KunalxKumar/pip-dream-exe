@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Moon, Sparkles, Lamp, Check } from 'lucide-react';
+import { Sparkles, Lamp } from 'lucide-react';
 import WindowPanel from './WindowPanel';
 import { nightlightsData } from '../data/projectsData';
 import { playClickSound, playChimeSound } from '../utils/audio';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Music, Play, Pause, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { Music, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import WindowPanel from './WindowPanel';
 import { playMusicBoxNote, playClickSound, getAudioMuted, setAudioMuted } from '../utils/audio';
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { Sparkles, Moon, Award, X } from 'lucide-react';
+import { Sparkles, Moon, Award } from 'lucide-react';
 import WindowPanel from './WindowPanel';
 import { playSecretMelody, playClickSound } from '../utils/audio';
 

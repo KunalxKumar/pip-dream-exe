@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, MapPin, CheckCircle2, RotateCcw, Sparkles } from 'lucide-react';
+import { Send, Sparkles } from 'lucide-react';
 import WindowPanel from './WindowPanel';
 import { dreamPackets } from '../data/dreamsData';
 import { playClickSound, playChimeSound } from '../utils/audio';

@@ -55,7 +55,7 @@ export default function StoryScene() {
   // When arriving at scene 6, trigger the Section 15 WOW MOMENT sequence
   useEffect(() => {
     if (currentIdx === 5) {
-      setWowStage('SIGNAL');
+      const t0 = setTimeout(() => setWowStage('SIGNAL'), 0);
       const t1 = setTimeout(() => setWowStage('CALCULATING'), 700);
       const t2 = setTimeout(() => setWowStage('LOCKED'), 1400);
       const t3 = setTimeout(() => setWowStage('DELIVERING'), 2100);
@@ -65,13 +65,15 @@ export default function StoryScene() {
       }, 2900);
 
       return () => {
+        clearTimeout(t0);
         clearTimeout(t1);
         clearTimeout(t2);
         clearTimeout(t3);
         clearTimeout(t4);
       };
     } else {
-      setWowStage('IDLE');
+      const tReset = setTimeout(() => setWowStage('IDLE'), 0);
+      return () => clearTimeout(tReset);
     }
   }, [currentIdx]);
 

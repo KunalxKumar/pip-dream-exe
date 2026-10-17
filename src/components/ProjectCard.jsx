@@ -1,5 +1,5 @@
 import React from 'react';
-import { Music, MapPin, Lamp, Sparkles, Folder } from 'lucide-react';
+import { Music, MapPin, Lamp, Sparkles } from 'lucide-react';
 import WindowPanel from './WindowPanel';
 import { playClickSound } from '../utils/audio';
 
