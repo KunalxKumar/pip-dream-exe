@@ -1418,6 +1418,194 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   margin-top: 4px;
 }
 
+/* Step 4: Interactive Project Mini-Stages (Show First) */
+.project-mini-stage {
+  background: var(--pip-cream);
+  border: 1.5px solid var(--pip-brown);
+  border-radius: 6px;
+  padding: 10px 12px;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.6), 2px 2px 0px rgba(92, 64, 51, 0.1);
+  transition: all 0.2s ease;
+}
+
+[data-theme="midnight"] .project-mini-stage {
+  background: #171426;
+  border-color: #5A4373;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.05), 2px 2px 0px #0F0B18;
+}
+
+.mini-stage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed var(--pip-brown-light);
+  padding-bottom: 4px;
+}
+
+.mini-stage-label {
+  font-size: 0.75rem;
+  color: var(--pip-berry);
+  font-weight: bold;
+}
+
+[data-theme="midnight"] .mini-stage-label {
+  color: #E8C978;
+}
+
+.mini-stage-tempo {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.mini-visual-notes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 10px 0;
+  font-size: 1.3rem;
+  color: var(--pip-berry);
+}
+
+[data-theme="midnight"] .mini-visual-notes {
+  color: #F8EBDD;
+}
+
+.mini-visual-notes .note-item {
+  transition: transform 0.2s ease;
+}
+
+.mini-visual-notes.is-playing .n1 {
+  animation: starTwinkle 0.4s infinite alternate;
+  color: var(--pip-yellow);
+}
+
+.mini-visual-notes.is-playing .n2 {
+  animation: starTwinkle 0.4s infinite alternate 0.15s;
+  color: var(--pip-pink);
+}
+
+.mini-visual-notes.is-playing .n3 {
+  animation: starTwinkle 0.4s infinite alternate 0.3s;
+  color: var(--pip-green);
+}
+
+.mini-note-mood {
+  font-size: 0.72rem;
+  margin-left: auto;
+  color: var(--text-muted);
+}
+
+.mini-route-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0 10px 0;
+  font-size: 0.72rem;
+  background: var(--window-bg);
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--pip-brown-light);
+}
+
+.mini-route-flow .step-node {
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: var(--text-muted);
+  transition: all 0.25s ease;
+}
+
+.mini-route-flow .step-arrow {
+  color: var(--pip-brown-light);
+  font-weight: bold;
+}
+
+.mini-route-flow .step-node.active-moon {
+  background: var(--pip-yellow);
+  color: var(--pip-brown);
+  font-weight: bold;
+}
+
+.mini-route-flow .step-node.active-cloud {
+  background: var(--pip-lavender);
+  color: var(--pip-brown);
+  font-weight: bold;
+}
+
+.mini-route-flow .step-node.active-win {
+  background: var(--pip-pink);
+  color: #FFF8F1;
+  font-weight: bold;
+}
+
+.mini-route-flow .step-node.active-sleep {
+  background: var(--pip-green);
+  color: #FFF8F1;
+  font-weight: bold;
+}
+
+.mini-lamp-display {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 6px 0 10px 0;
+  padding: 6px 8px;
+  background: var(--window-bg);
+  border-radius: 4px;
+  border: 1px solid var(--pip-brown-light);
+}
+
+.mini-nightlight-preview.light-active .mini-lamp-glow .lamp-beam {
+  color: #B27B00;
+  font-weight: bold;
+}
+
+[data-theme="midnight"] .mini-nightlight-preview.light-active .mini-lamp-glow .lamp-beam {
+  color: #FCE7A2;
+  text-shadow: 0 0 6px rgba(252, 231, 162, 0.4);
+}
+
+.mini-nightlight-preview.light-dim .mini-lamp-glow .lamp-beam {
+  color: var(--text-muted);
+}
+
+.mini-meter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.mini-meter-blocks {
+  color: var(--pip-berry);
+  letter-spacing: 1px;
+}
+
+[data-theme="midnight"] .mini-meter-blocks {
+  color: #E8C978;
+}
+
+.mini-trigger-btn {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  justify-content: center;
+  background: var(--window-bg);
+  border: 1.5px solid var(--pip-brown);
+  color: var(--text-main);
+  box-shadow: 1px 1px 0px var(--pip-brown);
+}
+
+.mini-trigger-btn:hover {
+  background: var(--pip-cream);
+  color: var(--pip-berry);
+}
+
+.mini-trigger-btn.active {
+  background: var(--pip-berry);
+  color: #FFF8F1;
+}
+
 .workbench-selector-bar {
   display: flex;
   gap: 10px;
