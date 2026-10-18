@@ -584,10 +584,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .pip-desktop-layout {
   display: flex;
   gap: 28px;
-  max-width: 1540px;
+  max-width: 1440px;
   width: 100%;
-  margin: 0;
-  padding: 24px 32px;
+  margin: 0 auto;
+  padding: 24px 28px;
   position: relative;
   z-index: 1;
   box-sizing: border-box;
