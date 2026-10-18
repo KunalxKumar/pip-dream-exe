@@ -1608,10 +1608,56 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .workbench-selector-bar {
   display: flex;
-  gap: 10px;
+  gap: 6px;
   flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 16px;
+  align-items: flex-end;
+  margin-bottom: -2px;
+  position: relative;
+  z-index: 2;
+  padding-left: 8px;
+}
+
+.workbench-selector-bar .pip-button {
+  border-bottom: 2px solid var(--pip-brown);
+  border-radius: 6px 6px 0 0;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  background: var(--pip-cream);
+  color: var(--text-muted);
+  box-shadow: none;
+  transition: all 0.15s ease;
+}
+
+[data-theme="midnight"] .workbench-selector-bar .pip-button {
+  background: #171426;
+  border-color: #5A4373;
+  color: #B5A6C9;
+}
+
+.workbench-selector-bar .pip-button:hover {
+  background: var(--window-bg);
+  color: var(--pip-berry);
+}
+
+[data-theme="midnight"] .workbench-selector-bar .pip-button:hover {
+  color: #E8C978;
+}
+
+.workbench-selector-bar .pip-button.pip-button-primary {
+  background: var(--window-bg);
+  color: var(--pip-berry);
+  font-weight: bold;
+  border-bottom: 2px solid var(--window-bg);
+  box-shadow: 2px -2px 0px rgba(92, 64, 51, 0.15);
+  transform: translateY(-2px);
+}
+
+[data-theme="midnight"] .workbench-selector-bar .pip-button.pip-button-primary {
+  background: #2C2235;
+  color: #E8C978;
+  border-color: #5A4373;
+  border-bottom: 2px solid #2C2235;
+  box-shadow: 2px -2px 0px #0F0B18;
 }
 
 /* Phase 3: Project 01 — Lullaby Lab Styles (Master Spec Section 11) */
