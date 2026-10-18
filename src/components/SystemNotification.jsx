@@ -61,15 +61,24 @@ export default function SystemNotification({ isOpen, onClose, onHelpPip }) {
               Someone forgot how to sleep under the starlight.
             </p>
 
-            <button
-              type="button"
-              className="pip-button pip-button-primary notification-cta-btn"
-              onClick={handleHelp}
-              autoFocus
-            >
-              <Sparkles size={13} />
-              <span className="font-retro">[ HELP PIP ]</span>
-            </button>
+            <div className="notification-actions">
+              <button
+                type="button"
+                className="pip-button pip-button-primary notification-cta-btn"
+                onClick={handleHelp}
+                autoFocus
+              >
+                <Sparkles size={13} />
+                <span className="font-retro">[ HELP PIP ]</span>
+              </button>
+              <button
+                type="button"
+                className="pip-button notification-dismiss-btn"
+                onClick={handleClose}
+              >
+                <span className="font-retro">[ LATER ]</span>
+              </button>
+            </div>
           </div>
         </div>
       </motion.aside>

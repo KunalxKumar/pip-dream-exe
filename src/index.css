@@ -2719,12 +2719,41 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   color: #E8C978 !important;
 }
 
-.notification-cta-btn {
+.notification-actions {
+  display: flex;
+  gap: 8px;
   margin-top: 6px;
   width: 100%;
+}
+
+.notification-cta-btn {
+  flex: 1.5;
   justify-content: center;
-  padding: 10px;
+  padding: 8px 10px;
   font-size: 0.8rem;
+}
+
+.notification-dismiss-btn {
+  flex: 1;
+  justify-content: center;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  background: var(--pip-cream);
+  border: 1.5px solid var(--pip-brown);
+  color: var(--text-main);
+  box-shadow: 1px 1px 0px var(--pip-brown);
+}
+
+[data-theme="midnight"] .notification-dismiss-btn {
+  background: #211A2D;
+  border-color: #5A4373;
+  color: #B5A6C9;
+  box-shadow: 1px 1px 0px #0F0B18;
+}
+
+.notification-dismiss-btn:hover {
+  background: var(--window-bg);
+  color: var(--pip-berry);
 }
 
 /* Background Atmosphere: Drifting Starmotes */
