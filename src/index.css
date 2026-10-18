@@ -580,16 +580,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .s4 { top: 70%; right: 8%; animation-delay: 1.8s; font-size: 1.4rem; }
 .s5 { top: 88%; left: 18%; animation-delay: 1.4s; color: var(--pip-lavender); }
 
-/* Desktop Workspace with Icons on Left */
+/* Desktop Workspace with Icons on Left - Natural Full Desktop Layout */
 .pip-desktop-layout {
   display: flex;
   gap: 28px;
-  max-width: 1140px;
+  max-width: 1540px;
   width: 100%;
-  margin: 0 auto;
-  padding: 24px 20px;
+  margin: 0;
+  padding: 24px 32px;
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
 }
 
 /* 90s Desktop Icons Column */
@@ -2524,7 +2525,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 900px) {
   .pip-desktop-layout {
     flex-direction: column;
-    padding: 12px 10px;
+    padding: 12px 12px 70px 12px;
+    gap: 16px;
   }
 
   .pip-desktop-icons {
@@ -2535,22 +2537,29 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     padding-bottom: 8px;
     gap: 10px;
     justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .pip-desktop-icons::-webkit-scrollbar {
+    display: none;
   }
 
   .desktop-icon-btn {
     flex-shrink: 0;
     min-width: 76px;
     width: auto;
-    padding: 6px 8px;
+    padding: 8px 10px;
+    min-height: 44px;
   }
 
   .pip-hero-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 18px;
   }
 
   .pip-portrait-wrapper {
-    max-width: 250px;
+    max-width: 240px;
     margin: 0 auto;
     width: 100%;
   }
@@ -2572,16 +2581,29 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .enter-dreamspace-btn {
     width: 100%;
     white-space: nowrap;
+    min-height: 44px;
+  }
+
+  .workbench-selector-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .workbench-selector-bar .pip-button {
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }
 
 @media (max-width: 480px) {
   .hero-name {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 
   .hero-role {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .queue-body {
@@ -2650,19 +2672,19 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 /* Tightest mobile breakpoint: 375px - 430px */
 @media (max-width: 430px) {
   .hero-name {
-    font-size: 2.1rem;
+    font-size: 1.9rem;
   }
 
   .hero-role {
-    font-size: 1.35rem;
+    font-size: 1.15rem;
   }
 
   .quote-text {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
   }
 
   .pip-portrait-wrapper {
-    max-width: 200px;
+    max-width: 190px;
   }
 
   .pip-window-header {
@@ -2685,6 +2707,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
   .pip-button {
     min-height: 44px; /* Accessible touch target */
+  }
+
+  .taskbar-quick-launch {
+    display: none; /* Hide redundant taskbar shortcuts on small mobile screens */
+  }
+
+  .pip-taskbar {
+    height: 48px;
+    padding: 0 8px;
   }
 }
 
