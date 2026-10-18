@@ -43,8 +43,15 @@ export default function EasterEgg({ isOpen, onClose }) {
           </div>
 
           <div className="easter-spec-body font-mono">
+            <p className="easter-msg-access font-pixel">
+              ACCESSING /pip/private/ ...
+            </p>
             <p className="easter-msg-primary font-retro">
-              You found Pip's secret dream.
+              HELLO, VISITOR.
+              <br />
+              YOU FOUND PIP'S SECRET.
+              <br />
+              <span className="easter-heart">♡</span>
             </p>
 
             <div className="easter-divider font-mono">

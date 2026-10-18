@@ -72,7 +72,7 @@ export default function WindowPanel({
           {statusText && (
             <div className="pip-status-bar">
               <span className="pip-status-field">{statusText}</span>
-              <span className="font-pixel" style={{ opacity: 0.7 }}>
+              <span className="font-pixel pip-status-system-tag">
                 PipOS 1998
               </span>
             </div>

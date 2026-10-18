@@ -1,56 +1,80 @@
 import React from 'react';
 import { playClickSound } from '../utils/audio';
 
-export default function Desktop({ onIconClick, onEasterEggClick }) {
+export default function Desktop({
+  activeId = 'hero',
+  onIconClick,
+  onEasterEggClick,
+  onItemHover,
+  onItemLeave,
+}) {
   const desktopIcons = [
-    { id: 'hero', emoji: '👶', label: 'PIP', desc: 'Meet Pip' },
-    { id: 'projects', emoji: '📁', label: 'PROJECTS', desc: '3 Inventions' },
-    { id: 'story', emoji: '🌙', label: 'DREAM LOG', desc: 'Origin Chronicle' },
-    { id: 'lullaby-lab', emoji: '🎵', label: 'LULLABY LAB', desc: '432 Hz Synthesizer' },
-    { id: 'nightlight-lab', emoji: '🏮', label: 'NIGHTLIGHTS', desc: 'Lantern Daemon' },
-    { id: 'dream-route', emoji: '🗺️', label: 'DREAM ROUTES', desc: 'Cloud Delivery' },
+    { id: 'hero', emoji: '👶', label: 'PIP', desc: 'Meet Pip', gazeTarget: 'sidebar' },
+    { id: 'projects', emoji: '📁', label: 'PROJECTS', desc: '3 Inventions', gazeTarget: 'sidebar' },
+    { id: 'story', emoji: '🌙', label: 'DREAM LOG', desc: 'Origin Chronicle', gazeTarget: 'sidebar' },
+    { id: 'lullaby-lab', emoji: '🎵', label: 'LULLABY', desc: '432 Hz Synthesizer', gazeTarget: 'sidebar' },
+    { id: 'nightlight-lab', emoji: '🏮', label: 'LIGHTS', desc: 'Lantern Daemon', gazeTarget: 'sidebar' },
+    { id: 'dream-route', emoji: '🗺️', label: 'ROUTES', desc: 'Cloud Delivery', gazeTarget: 'sidebar' },
   ];
 
   return (
     <aside className="pip-desktop-icons" aria-label="Desktop icons">
-      {desktopIcons.map((item) => (
-        <button
-          key={item.id}
-          type="button"
-          className="desktop-icon-btn"
-          onClick={() => {
-            playClickSound();
-            if (onIconClick) onIconClick(item.id);
-          }}
-          aria-label={`Open ${item.label}: ${item.desc}`}
-          title={`${item.label} — ${item.desc}`}
-        >
-          <div className="icon-graphic">
-            <span className="icon-emoji" role="img" aria-hidden="true">
-              {item.emoji}
-            </span>
-          </div>
-          <span className="font-pixel icon-label">{item.label}</span>
-        </button>
-      ))}
+      {desktopIcons.map((item) => {
+        const isActive = activeId === item.id;
+        return (
+          <button
+            key={item.id}
+            type="button"
+            className={`desktop-icon-btn ${isActive ? 'is-active' : ''}`}
+            onClick={() => {
+              playClickSound();
+              if (onIconClick) onIconClick(item.id);
+            }}
+            onMouseEnter={() => {
+              if (onItemHover) onItemHover(item.gazeTarget);
+            }}
+            onMouseLeave={() => {
+              if (onItemLeave) onItemLeave();
+            }}
+            aria-label={`Open ${item.label}: ${item.desc}`}
+            aria-current={isActive ? 'page' : undefined}
+            title={`${item.label} — ${item.desc}`}
+          >
+            <div className="icon-graphic">
+              <span className="icon-emoji" role="img" aria-hidden="true">
+                {item.emoji}
+              </span>
+              <span className="icon-sparkle-hover" aria-hidden="true">✦</span>
+            </div>
+            <span className="font-pixel icon-label">{item.label}</span>
+          </button>
+        );
+      })}
 
-      {/* Secret Moon Charm Easter Egg icon */}
+      {/* Understated Mystery Charm Easter Egg */}
       <button
         type="button"
-        className="desktop-icon-btn secret-moon-btn"
+        className="desktop-icon-btn secret-moon-btn mystery-star-btn"
         onClick={() => {
           playClickSound();
           if (onEasterEggClick) onEasterEggClick();
         }}
-        title="Pip's Secret Moon Charm"
-        aria-label="Pip's Secret Moon Charm"
+        onMouseEnter={() => {
+          if (onItemHover) onItemHover('sidebar');
+        }}
+        onMouseLeave={() => {
+          if (onItemLeave) onItemLeave();
+        }}
+        title="Pip's Star Charm"
+        aria-label="Pip's Star Charm"
       >
         <div className="icon-graphic moon-glow">
           <span className="icon-emoji" role="img" aria-hidden="true">
-            ⭐
+            ★
           </span>
+          <span className="icon-sparkle-hover" aria-hidden="true">✨</span>
         </div>
-        <span className="font-pixel icon-label">SECRET.KEY</span>
+        <span className="font-pixel icon-label">★</span>
       </button>
     </aside>
   );

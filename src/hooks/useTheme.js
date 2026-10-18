@@ -14,6 +14,21 @@ export function useTheme() {
     localStorage.setItem('pip-dream-theme', theme);
   }, [theme]);
 
+  useEffect(() => {
+    const handleSync = () => {
+      const stored = localStorage.getItem('pip-dream-theme');
+      if (stored && stored !== theme) {
+        setTheme(stored);
+      }
+    };
+    window.addEventListener('storage', handleSync);
+    window.addEventListener('themechange', handleSync);
+    return () => {
+      window.removeEventListener('storage', handleSync);
+      window.removeEventListener('themechange', handleSync);
+    };
+  }, [theme]);
+
   const toggleTheme = useCallback(() => {
     playClickSound();
     setTheme((prev) => (prev === 'daylight' ? 'midnight' : 'daylight'));

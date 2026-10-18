@@ -46,7 +46,7 @@ export default function ProjectCard({ project, onInteract }) {
         </div>
 
         <div className="project-meta-box">
-          {Object.entries(project.meta).map(([key, val]) => (
+          {Object.entries(project.meta || {}).map(([key, val]) => (
             <div key={key} className="meta-pair">
               <span className="meta-key font-mono">{key.toUpperCase()}:</span>
               <span className="meta-val font-pixel">{val}</span>
@@ -55,7 +55,7 @@ export default function ProjectCard({ project, onInteract }) {
         </div>
 
         <div className="project-tags">
-          {project.tags.map((tag, idx) => (
+          {(project.tags || []).map((tag, idx) => (
             <span key={idx} className="project-chip font-mono">
               #{tag}
             </span>

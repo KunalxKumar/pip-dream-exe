@@ -32,6 +32,7 @@ export const storyScenes = [
   {
     id: 'scene-03',
     num: '03',
+    time: '00:12',
     title: 'Composing The Wave',
     location: 'BEDTIME HARMONIC ENGINE',
     headline: 'Pip begins composing a lullaby.',

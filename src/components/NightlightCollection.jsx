@@ -21,6 +21,8 @@ export default function NightlightCollection({ onNightlightGlow }) {
 
       // Connect to site night mode if turning on (per Section 13)
       document.documentElement.setAttribute('data-theme', 'midnight');
+      localStorage.setItem('pip-dream-theme', 'midnight');
+      window.dispatchEvent(new Event('themechange'));
     }
   };
 

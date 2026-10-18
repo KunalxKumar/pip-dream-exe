@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import BootScreen from './components/BootScreen';
 import Desktop from './components/Desktop';
 import Pip from './components/Pip';
@@ -9,6 +9,7 @@ import NightlightCollection from './components/NightlightCollection';
 import StoryScene from './components/StoryScene';
 import EasterEgg from './components/EasterEgg';
 import StatusBar from './components/StatusBar';
+import SystemNotification from './components/SystemNotification';
 import WindowPanel from './components/WindowPanel';
 import { projectsData } from './data/projectsData';
 import { Sparkles, Moon, Compass } from 'lucide-react';
@@ -17,14 +18,54 @@ import { playClickSound } from './utils/audio';
 export default function App() {
   const [hasBooted, setHasBooted] = useState(false);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [focusedGaze, setFocusedGaze] = useState(null);
   const [activeSection, setActiveSection] = useState('hero');
   const [activeTool, setActiveTool] = useState('lullaby-lab');
 
-  // Section refs for smooth scrolling
+  // Section refs for smooth scrolling & scroll tracking
   const heroRef = useRef(null);
   const projectsRef = useRef(null);
   const storyRef = useRef(null);
   const interactiveRef = useRef(null);
+
+  // Trigger system notification 800ms after boot finishes
+  const handleBootComplete = () => {
+    setHasBooted(true);
+    setTimeout(() => {
+      setNotificationOpen(true);
+    }, 800);
+  };
+
+  // Scroll spy to highlight taskbar windows dynamically as user scrolls
+  useEffect(() => {
+    const sections = [
+      { id: 'hero', ref: heroRef },
+      { id: 'projects', ref: projectsRef },
+      { id: 'story', ref: storyRef },
+      { id: 'dream-lab', ref: interactiveRef },
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const match = sections.find((s) => s.ref.current === entry.target);
+            if (match) {
+              setActiveSection(match.id);
+            }
+          }
+        });
+      },
+      { threshold: 0.35, rootMargin: '-40px 0px -40px 0px' }
+    );
+
+    sections.forEach(({ ref }) => {
+      if (ref.current) observer.observe(ref.current);
+    });
+
+    return () => observer.disconnect();
+  }, [hasBooted]);
 
   const scrollToSection = (id) => {
     setActiveSection(id);
@@ -51,25 +92,30 @@ export default function App() {
     <div className="pip-os-root">
       {/* Phase 2 Boot Screen */}
       {!hasBooted && (
-        <BootScreen onBootComplete={() => setHasBooted(true)} />
+        <BootScreen onBootComplete={handleBootComplete} />
       )}
 
       {/* Main 90s Operating System Desktop */}
       <div className="pip-desktop-environment">
-        {/* Floating Decorative Nursery Stars */}
+        {/* Floating Decorative Nursery Stars & Drifting Moonbeam */}
         <div className="nursery-stars-layer" aria-hidden="true">
           <span className="star-twinkle s1">✦</span>
           <span className="star-twinkle s2">★</span>
           <span className="star-twinkle s3">✦</span>
           <span className="star-twinkle s4">★</span>
           <span className="star-twinkle s5">✦</span>
+          <div className="drifting-starmote m1" />
+          <div className="drifting-starmote m2" />
         </div>
 
         {/* 90s Desktop Workspace with Left Icons */}
         <div className="pip-desktop-layout">
           <Desktop
+            activeId={activeSection === 'dream-lab' ? activeTool : activeSection}
             onIconClick={scrollToSection}
             onEasterEggClick={() => setEasterEggOpen(true)}
+            onItemHover={(gaze) => setFocusedGaze(gaze)}
+            onItemLeave={() => setFocusedGaze(null)}
           />
 
           {/* Main Scrollable Canvas for Pip's World */}
@@ -79,6 +125,7 @@ export default function App() {
               <Pip
                 onEnterDreamspace={() => scrollToSection('projects')}
                 onTriggerEasterEgg={() => setEasterEggOpen(true)}
+                focusedGaze={focusedGaze}
               />
             </section>
 
@@ -99,11 +146,11 @@ export default function App() {
               </div>
             </section>
 
-            {/* 3. Origin Story Section: Short 5-Scene Chronicle */}
+            {/* 3. Origin Story Section: 6-Scene Origin Chronicle */}
             <section ref={storyRef} id="story-section" aria-label="Pip's Origin Story" style={{ marginTop: '36px' }}>
               <div className="section-title-bar">
                 <span className="font-retro title-text">PIP'S MIDNIGHT CHRONICLE</span>
-                <span className="font-pixel subtitle-text">[ Origin Log 23:47 → 05:30 ]</span>
+                <span className="font-pixel subtitle-text">[ Origin Log 23:47 → 01:03 ]</span>
               </div>
               <StoryScene />
             </section>
@@ -115,8 +162,8 @@ export default function App() {
                 <span className="font-pixel subtitle-text">[ Help Pip Deliver Dreams ]</span>
               </div>
 
-              {/* Sub-tabs for the interactive tools */}
-              <div className="interactive-tabs-bar">
+              {/* Workbench Tab Switcher */}
+              <div className="workbench-selector-bar">
                 <button
                   type="button"
                   className={`pip-button ${activeTool === 'lullaby-lab' ? 'pip-button-primary' : ''}`}
@@ -194,6 +241,13 @@ export default function App() {
           activeSection={activeSection}
           onNavClick={scrollToSection}
           onStartClick={() => setEasterEggOpen(true)}
+        />
+
+        {/* System Message Notification Dialog */}
+        <SystemNotification
+          isOpen={notificationOpen}
+          onClose={() => setNotificationOpen(false)}
+          onHelpPip={() => scrollToSection('dream-lab')}
         />
 
         {/* Easter Egg Modal */}

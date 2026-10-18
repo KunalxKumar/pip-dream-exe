@@ -1,40 +1,42 @@
 :root {
-  /* Rule 11 Palette Tokens */
-  --pip-cream: #FFF8F1;
-  --pip-cream-soft: #FFF2E6;
+  /* Phase 0 Core Design Tokens */
+  --bg-desktop: #FFF8F1;
+  --window-bg: #FFFDF9;
   --pip-berry: #A34063;
   --pip-berry-dark: #7D2846;
   --pip-berry-light: #C0587E;
+  --pip-pink-light: #F2D1DC;
+  --pip-pink: #F2D1DC;
+  --pip-pink-deep: #A34063;
   --pip-brown: #5C4033;
-  --pip-brown-light: #7E5948;
+  --pip-brown-light: #8A6A59;
   --pip-brown-dim: rgba(92, 64, 51, 0.12);
+  --pip-yellow: #F4D982;
+  --pip-yellow-warm: #E8C978;
+  --pip-green: #5E8B61;
+  --pip-cream: #FFF8F1;
+  --pip-cream-soft: #FFFDF9;
 
   /* Supporting Pastel Colors */
-  --pip-pink: #F7D6E0;
-  --pip-pink-deep: #EEADC1;
   --pip-lavender: #D8C5E5;
   --pip-lavender-deep: #BFA5D4;
   --pip-moonlight: #99B7DE;
   --pip-moonlight-deep: #7497C7;
-  --pip-yellow: #FCE7A2;
-  --pip-yellow-warm: #F6D672;
-  --pip-green: #9BB898;
 
   /* Theme: Default Daytime Nursery */
-  --bg-desktop: #FBF4EC;
-  --bg-pattern: #F2E4D5;
-  --window-bg: #FFFDF9;
+  --bg-pattern: #F2D1DC;
   --window-border-light: #FFFFFF;
   --window-border-dark: #D4BBA5;
-  --window-header-bg: #F7D6E0;
+  --window-header-bg: #F2D1DC;
   --window-header-text: #5C4033;
   --text-main: #5C4033;
-  --text-muted: #7E5948;
-  --panel-bg: rgba(255, 248, 241, 0.95);
-  --taskbar-bg: #EEDDD0;
-  --taskbar-border: #D3BEAE;
-  --shadow-retro: 3px 3px 0px rgba(92, 64, 51, 0.2);
+  --text-muted: #8A6A59;
+  --panel-bg: rgba(255, 253, 249, 0.96);
+  --taskbar-bg: #F2D1DC;
+  --taskbar-border: #D4BBA5;
+  --shadow-retro: 2px 2px 0px rgba(92, 64, 51, 0.2);
   --shadow-window: 4px 4px 0px #5C4033;
+  --shadow-button: 2px 2px 0px #5C4033;
 
   /* Typography */
   --font-retro: 'Press Start 2P', monospace;
@@ -47,21 +49,36 @@
 }
 
 [data-theme="midnight"] {
-  /* Midnight Dream Theme */
-  --bg-desktop: #1C1527;
-  --bg-pattern: #251B33;
-  --window-bg: #271E36;
-  --window-border-light: #3D3054;
-  --window-border-dark: #120D1A;
-  --window-header-bg: #3E243F;
-  --window-header-text: #FCE7A2;
-  --text-main: #FFF8F1;
-  --text-muted: #D8C5E5;
-  --panel-bg: rgba(39, 30, 54, 0.95);
-  --taskbar-bg: #1A1325;
-  --taskbar-border: #322547;
-  --shadow-retro: 3px 3px 0px rgba(0, 0, 0, 0.4);
-  --shadow-window: 4px 4px 0px #0D0914;
+  /* Midnight Dream Moonlit Nursery Theme */
+  --bg-desktop: #171426;
+  --bg-pattern: #2C2235;
+  --window-bg: #211A2D;
+  --window-border-light: #3D2D50;
+  --window-border-dark: #0F0B18;
+  --window-header-bg: #2C2235;
+  --window-header-text: #E8C978;
+  --window-header-icon: #E8C978;
+  --text-main: #F8EBDD;
+  --text-muted: #B5A6C9;
+  --panel-bg: rgba(33, 26, 45, 0.96);
+  --taskbar-bg: #1A1428;
+  --taskbar-border: #2C2235;
+  --shadow-retro: 2px 2px 0px rgba(0, 0, 0, 0.4);
+  --shadow-window: 4px 4px 0px #0F0B18;
+  --shadow-button: 2px 2px 0px #0F0B18;
+
+  /* Nocturnal theme adaptations for Pip's core tokens */
+  --pip-brown: #3D2D50;
+  --pip-brown-light: #5A4373;
+  --pip-cream: #211A2D;
+  --pip-cream-soft: #2C2235;
+  --pip-berry: #C97996;
+  --pip-berry-light: #E08FA8;
+  --pip-pink: #C97996;
+  --pip-pink-light: #E2A7BC;
+  --pip-yellow: #E8C978;
+  --pip-lavender: #B5A6C9;
+  --pip-green: #7BA87E;
 }
 
 * {
@@ -78,7 +95,7 @@ html, body {
   color: var(--text-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
@@ -247,6 +264,48 @@ h1, h2, h3, h4 {
   background: var(--pip-yellow);
 }
 
+/* Midnight Theme Adaptations for Buttons */
+[data-theme="midnight"] .pip-button {
+  background: #241A33;
+  color: #FFF8F1;
+  border-color: #523E72;
+  box-shadow: 2px 2px 0px #0D0914;
+}
+
+[data-theme="midnight"] .pip-button:hover {
+  background: #36264C;
+  border-color: var(--pip-yellow);
+  color: var(--pip-yellow);
+  box-shadow: 3px 3px 0px #0D0914;
+}
+
+[data-theme="midnight"] .pip-button:active {
+  box-shadow: 0px 0px 0px #0D0914;
+}
+
+[data-theme="midnight"] .pip-button-primary {
+  background: var(--pip-berry);
+  color: #FFF8F1;
+  border-color: #FCE7A2;
+}
+
+[data-theme="midnight"] .pip-button-primary:hover {
+  background: var(--pip-berry-light);
+  color: #FFF8F1;
+}
+
+[data-theme="midnight"] .pip-button-soft {
+  background: #2F2142;
+  color: #F7D6E0;
+  border-color: #523E72;
+}
+
+[data-theme="midnight"] .pip-button-soft:hover {
+  background: #3E2C57;
+  color: var(--pip-yellow);
+  border-color: var(--pip-yellow);
+}
+
 /* Accessibility Focus States (Rule 9) */
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
   outline: 3px solid var(--pip-berry);
@@ -261,8 +320,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
   font-family: var(--font-pixel);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--text-main);
   box-shadow: inset 1px 1px 0px var(--window-border-light);
 }
@@ -270,12 +331,35 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .pip-status-field {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 2px 8px;
+  gap: 8px;
+  padding: 4px 10px;
   background: var(--window-bg);
   border: 1.5px solid var(--pip-brown);
   border-radius: 4px;
   box-shadow: inset 1px 1px 0px rgba(0, 0, 0, 0.1);
+  color: var(--text-main);
+  flex-wrap: wrap;
+}
+
+.pip-status-system-tag {
+  color: var(--text-muted);
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+[data-theme="midnight"] .pip-status-bar {
+  border-top-color: #5A4373;
+  color: #F8EBDD;
+}
+
+[data-theme="midnight"] .pip-status-field {
+  background: #211A2D;
+  border-color: #5A4373;
+  color: #F8EBDD;
+}
+
+[data-theme="midnight"] .pip-status-system-tag {
+  color: #B5A6C9;
 }
 
 /* Badge & Tag */
@@ -366,12 +450,32 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .taskbar-window-tab:hover {
   background: var(--pip-yellow);
+  color: var(--pip-brown);
 }
 
 .taskbar-window-tab.active {
   background: var(--pip-berry);
   color: #FFF8F1;
   box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="midnight"] .taskbar-window-tab {
+  background: #211A2D;
+  border-color: #5A4373;
+  color: #F8EBDD;
+  box-shadow: 1px 1px 0px #0F0B18;
+}
+
+[data-theme="midnight"] .taskbar-window-tab:hover {
+  background: #2C2235;
+  border-color: var(--pip-yellow);
+  color: var(--pip-yellow);
+}
+
+[data-theme="midnight"] .taskbar-window-tab.active {
+  background: var(--pip-berry);
+  border-color: var(--pip-yellow);
+  color: #FFF8F1;
 }
 
 .taskbar-tray-item {
@@ -479,11 +583,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 /* Desktop Workspace with Icons on Left */
 .pip-desktop-layout {
   display: flex;
-  gap: 20px;
-  max-width: 1200px;
+  gap: 28px;
+  max-width: 1140px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 16px;
+  padding: 24px 20px;
   position: relative;
   z-index: 1;
 }
@@ -492,33 +596,57 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .pip-desktop-icons {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 88px;
+  gap: 12px;
+  width: 106px;
   flex-shrink: 0;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+  z-index: 20;
 }
 
 .desktop-icon-btn {
   background: transparent;
-  border: 1px dashed transparent;
-  border-radius: 6px;
-  padding: 6px 4px;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  padding: 8px 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   cursor: pointer;
   text-align: center;
-  transition: all 0.15s ease;
+  width: 100%;
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.15s ease, border-color 0.15s ease;
+  user-select: none;
 }
 
 .desktop-icon-btn:hover {
-  background: rgba(163, 64, 99, 0.12);
+  background: var(--pip-pink-light);
+  border-color: var(--pip-berry);
+  transform: translateY(-2px);
+}
+
+.desktop-icon-btn.is-active {
+  background: var(--pip-pink-light);
+  border-color: var(--pip-berry);
+  box-shadow: inset 1px 1px 0px rgba(92, 64, 51, 0.15);
+}
+
+[data-theme="midnight"] .desktop-icon-btn:hover {
+  background: rgba(201, 121, 150, 0.2);
+  border-color: var(--pip-berry);
+}
+
+[data-theme="midnight"] .desktop-icon-btn.is-active {
+  background: rgba(201, 121, 150, 0.28);
   border-color: var(--pip-berry);
 }
 
 .icon-graphic {
-  width: 44px;
-  height: 44px;
+  position: relative;
+  width: 48px;
+  height: 48px;
   background: var(--window-bg);
   border: 2px solid var(--pip-brown);
   border-radius: 8px;
@@ -526,24 +654,83 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   align-items: center;
   justify-content: center;
   box-shadow: 2px 2px 0px var(--pip-brown);
+  transition: box-shadow 0.18s ease, transform 0.18s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .desktop-icon-btn:hover .icon-graphic {
-  transform: translateY(-2px);
   box-shadow: 3px 3px 0px var(--pip-brown);
+  transform: scale(1.04);
+}
+
+.desktop-icon-btn.is-active .icon-graphic {
+  background: var(--pip-cream);
+  border-color: var(--pip-berry);
+  box-shadow: 2px 2px 0px var(--pip-berry);
+}
+
+[data-theme="midnight"] .icon-graphic {
+  border-color: var(--pip-brown-light);
+  box-shadow: 2px 2px 0px #0F0B18;
+}
+
+[data-theme="midnight"] .desktop-icon-btn:hover .icon-graphic {
+  border-color: var(--pip-yellow);
+  box-shadow: 3px 3px 0px #0F0B18;
+}
+
+[data-theme="midnight"] .desktop-icon-btn.is-active .icon-graphic {
+  background: #2C2235;
+  border-color: var(--pip-berry);
+  box-shadow: 2px 2px 0px var(--pip-berry);
+}
+
+.icon-sparkle-hover {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 11px;
+  color: var(--pip-yellow);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.18s ease;
+  pointer-events: none;
+}
+
+.desktop-icon-btn:hover .icon-sparkle-hover,
+.desktop-icon-btn.is-active .icon-sparkle-hover {
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .icon-label {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: var(--text-main);
   line-height: 1.1;
-  word-break: break-all;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  transition: color 0.15s ease, font-weight 0.15s ease;
 }
 
-.secret-moon-btn .moon-glow {
-  background: #FFFBEB;
+.desktop-icon-btn:hover .icon-label {
+  color: var(--pip-berry);
+}
+
+.desktop-icon-btn.is-active .icon-label {
+  color: var(--pip-berry);
+  font-weight: bold;
+}
+
+.mystery-star-btn .moon-glow {
+  background: #FFFDF5;
+  border-color: var(--pip-brown);
+  color: #D97706;
+  font-size: 18px;
+  animation: gentleFloat 3.5s infinite ease-in-out;
+}
+
+.mystery-star-btn:hover .moon-glow {
   border-color: #D97706;
-  animation: gentleFloat 3s infinite ease-in-out;
+  box-shadow: 0 0 10px rgba(252, 231, 162, 0.8), 3px 3px 0px var(--pip-brown);
 }
 
 /* Main Window Stack (The Narrative Canvas) */
@@ -572,10 +759,18 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   color: var(--pip-brown);
 }
 
+[data-theme="midnight"] .title-text {
+  color: #FCE7A2;
+}
+
 .subtitle-text {
   font-size: 1.05rem;
   color: var(--pip-berry);
   font-weight: bold;
+}
+
+[data-theme="midnight"] .subtitle-text {
+  color: #F7D6E0;
 }
 
 /* Hero Section: Pip Profile Window */
@@ -603,6 +798,22 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   box-shadow: 4px 4px 0px var(--pip-brown);
   background: #FFFDF9;
   cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.pip-image-frame.pip-excited {
+  transform: scale(1.025) translateY(-2px);
+  box-shadow: 0 0 20px rgba(252, 231, 162, 0.9), 4px 6px 0px var(--pip-brown);
+}
+
+.pip-excitement-sparkle {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 20px;
+  pointer-events: none;
+  animation: gentleFloat 1.2s infinite ease-in-out;
+  filter: drop-shadow(0 0 6px #FCE7A2);
 }
 
 .pip-official-img {
@@ -624,7 +835,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   border-radius: 50%;
   box-shadow: 0 0 10px 4px #FCE7A2;
   pointer-events: none;
-  transition: transform 0.1s ease-out, opacity 0.15s ease;
+  transition: transform 0.12s ease-out, opacity 0.15s ease, width 0.2s ease, height 0.2s ease;
+}
+
+.pip-eye-track-glow.excited {
+  width: 14px;
+  height: 14px;
+  background: #FFFFFF;
+  box-shadow: 0 0 14px 6px #FCE7A2;
 }
 
 /* Approximate positions of eye lights in Pip's asset */
@@ -659,7 +877,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .pip-hero-bio {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   justify-content: center;
 }
 
@@ -676,35 +894,52 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   font-weight: bold;
   letter-spacing: 1px;
   color: var(--pip-berry);
-  background: var(--pip-pink);
+  background: var(--pip-pink-light);
   border: 1.5px solid var(--pip-brown);
   border-radius: 4px;
   padding: 3px 10px;
   box-shadow: 1px 1px 0px var(--pip-brown);
 }
 
+[data-theme="midnight"] .nursery-badge {
+  color: #E8C978;
+  background: #2C2235;
+  border-color: #5A4373;
+  box-shadow: 1px 1px 0px #0F0B18;
+}
+
 .hero-name {
-  font-size: 2.6rem;
+  font-size: 3.2rem;
   letter-spacing: 2px;
   color: var(--text-main);
-  line-height: 1.1;
+  line-height: 1.05;
   text-shadow: 2px 2px 0px var(--pip-pink);
 }
 
+[data-theme="midnight"] .hero-name {
+  color: #F8EBDD;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);
+}
+
 .hero-role {
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   color: var(--pip-berry);
   letter-spacing: 0.5px;
+}
+
+[data-theme="midnight"] .hero-role {
+  color: #E8C978;
 }
 
 .hero-quote-card {
   position: relative;
   background: var(--pip-cream);
-  border: 2px solid var(--pip-brown);
-  border-radius: 10px;
-  padding: 16px 20px;
-  box-shadow: 3px 3px 0px var(--pip-brown);
+  border: 1.5px solid var(--pip-brown);
+  border-radius: 8px;
+  padding: 10px 16px;
+  box-shadow: 2px 2px 0px var(--pip-brown);
   transition: transform 0.15s ease;
+  width: 100%;
 }
 
 .hero-quote-card:hover {
@@ -712,11 +947,167 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .quote-text {
-  font-size: 1.18rem;
-  font-weight: 600;
-  color: var(--pip-brown);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-main);
   font-style: italic;
-  line-height: 1.5;
+  line-height: 1.45;
+}
+
+[data-theme="midnight"] .hero-quote-card {
+  background: #211A2D;
+  border-color: #5A4373;
+  box-shadow: 2px 2px 0px #0F0B18;
+}
+
+[data-theme="midnight"] .quote-text {
+  color: #F8EBDD;
+}
+
+/* Dream Queue Card (Native PipOS Status Panel) */
+.dream-queue-card {
+  background: var(--window-bg);
+  border: 2px solid var(--pip-brown);
+  border-radius: 8px;
+  box-shadow: 2.5px 2.5px 0px var(--pip-brown);
+  overflow: hidden;
+  width: 100%;
+}
+
+.queue-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(92, 64, 51, 0.06);
+  border-bottom: 1.5px solid var(--pip-brown);
+  font-size: 0.76rem;
+  font-weight: bold;
+}
+
+.queue-title {
+  color: var(--text-main);
+  letter-spacing: 1px;
+}
+
+.queue-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--pip-yellow);
+  border: 1px solid var(--pip-brown);
+  border-radius: 10px;
+  padding: 2px 8px;
+  font-size: 0.68rem;
+  color: var(--pip-brown);
+  font-weight: bold;
+}
+
+.queue-body {
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.88rem;
+}
+
+.queue-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text-main);
+}
+
+.queue-item-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.queue-bullet {
+  color: var(--pip-berry);
+  font-size: 0.8rem;
+}
+
+.queue-desc {
+  letter-spacing: 0.5px;
+}
+
+.queue-pill-status {
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--pip-brown);
+  background: var(--pip-cream);
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+}
+
+.queue-pill-status.waiting {
+  background: #FFF2D6;
+  border-color: #D97706;
+  color: #B45309;
+}
+
+.queue-pill-status.online {
+  background: #E8F5E9;
+  border-color: #5E8B61;
+  color: #2E7D32;
+}
+
+.queue-pill-status.bedtime {
+  background: #F2D1DC;
+  border-color: #A34063;
+  color: #7D2846;
+}
+
+[data-theme="midnight"] .dream-queue-card {
+  background: #211A2D;
+  border-color: #5A4373;
+  box-shadow: 2px 2px 0px #0F0B18;
+}
+
+[data-theme="midnight"] .queue-header {
+  background: #2C2235;
+  border-bottom-color: #5A4373;
+}
+
+[data-theme="midnight"] .queue-title {
+  color: #E8C978;
+}
+
+[data-theme="midnight"] .queue-status-tag {
+  background: #E8C978;
+  border-color: #5A4373;
+  color: #171426;
+}
+
+[data-theme="midnight"] .queue-bullet {
+  color: #E8C978;
+}
+
+[data-theme="midnight"] .queue-item {
+  color: #F8EBDD;
+}
+
+[data-theme="midnight"] .queue-pill-status.waiting {
+  background: #3B2E1E;
+  border-color: #E8C978;
+  color: #E8C978;
+}
+
+[data-theme="midnight"] .queue-pill-status.online {
+  background: #1C3322;
+  border-color: #7BA87E;
+  color: #A5D6A7;
+}
+
+[data-theme="midnight"] .queue-pill-status.bedtime {
+  background: #3D2331;
+  border-color: #C97996;
+  color: #E2A7BC;
 }
 
 .hero-actions {
@@ -724,23 +1115,68 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   flex-direction: column;
   gap: 8px;
   margin-top: 4px;
+  width: 100%;
 }
 
+/* Primary Hero Call To Action */
 .enter-dreamspace-btn {
-  align-self: flex-start;
-  padding: 12px 22px;
-  font-size: 0.8rem;
-  gap: 10px;
+  width: 100%;
+  padding: 13px 24px;
+  font-size: 0.88rem;
+  gap: 12px;
+  letter-spacing: 1px;
   box-shadow: 3px 3px 0px var(--pip-brown);
+  position: relative;
+  justify-content: center;
+}
+
+.primary-cta-pulse {
+  animation: ctaPulse 3.5s infinite ease-in-out;
+}
+
+@keyframes ctaPulse {
+  0%, 100% {
+    box-shadow: 3px 3px 0px var(--pip-brown), 0 0 8px rgba(163, 64, 99, 0.25);
+  }
+  50% {
+    box-shadow: 3px 3px 0px var(--pip-brown), 0 0 18px rgba(163, 64, 99, 0.5);
+  }
 }
 
 .enter-dreamspace-btn:hover {
-  box-shadow: 4px 4px 0px var(--pip-brown);
+  transform: translateY(-2px);
+  box-shadow: 4px 5px 0px var(--pip-brown), 0 0 22px rgba(163, 64, 99, 0.6);
+}
+
+[data-theme="midnight"] .enter-dreamspace-btn {
+  border-color: var(--pip-yellow);
+  box-shadow: 3px 3px 0px #0F0B18;
+}
+
+[data-theme="midnight"] .enter-dreamspace-btn:hover {
+  box-shadow: 4px 5px 0px #0F0B18, 0 0 20px rgba(232, 201, 120, 0.5);
+}
+
+.enter-dreamspace-btn:focus-visible {
+  outline: 3px solid var(--pip-yellow);
+  outline-offset: 3px;
+}
+
+.cta-arrow {
+  transition: transform 0.2s ease;
+}
+
+.enter-dreamspace-btn:hover .cta-arrow {
+  transform: translateY(3px);
 }
 
 .hero-subhint {
   font-size: 1.05rem;
   color: var(--text-muted);
+}
+
+[data-theme="midnight"] .hero-subhint {
+  color: #B5A6C9;
 }
 
 /* Phase 2: Desktop Emoji Graphic */
@@ -765,13 +1201,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .boot-subhead {
   font-size: 0.85rem;
-  color: var(--pip-pink);
+  color: var(--pip-yellow);
   letter-spacing: 0.5px;
 }
 
 .boot-caption {
   font-size: 0.75rem;
-  color: #D8C5E5;
+  color: #F8EBDD;
+  opacity: 0.9;
 }
 
 .boot-divider {
@@ -823,7 +1260,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .status-header {
   font-size: 1.1rem;
-  color: var(--pip-pink);
+  color: var(--pip-yellow);
 }
 
 .status-list {
@@ -853,7 +1290,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .boot-hint {
-  color: #D8C5E5;
+  color: #F8EBDD;
   font-size: 1.05rem;
 }
 
@@ -981,6 +1418,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   margin-top: 4px;
 }
 
+.workbench-selector-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
 /* Phase 3: Project 01 — Lullaby Lab Styles (Master Spec Section 11) */
 .lullaby-spec-card {
   display: flex;
@@ -997,6 +1442,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   border-radius: 8px;
   padding: 16px 20px;
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="midnight"] .lullaby-visual-stage {
+  background: #171123;
+  border-color: #523E72;
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.6), 0 0 1px rgba(252, 231, 162, 0.2);
 }
 
 .music-notes-floating {
@@ -1004,6 +1456,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   gap: 14px;
   font-size: 1.6rem;
   color: var(--pip-berry);
+}
+
+[data-theme="midnight"] .music-notes-floating {
+  color: var(--pip-yellow);
+  text-shadow: 0 0 10px rgba(252, 231, 162, 0.45);
 }
 
 .note {
@@ -1017,6 +1474,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .n1.bobbing { animation-delay: 0.1s; }
 .n2.bobbing { animation-delay: 0.25s; color: var(--pip-yellow); }
 .n3.bobbing { animation-delay: 0.4s; }
+
+[data-theme="midnight"] .n1.bobbing { animation-delay: 0.1s; color: var(--pip-yellow); }
+[data-theme="midnight"] .n2.bobbing { animation-delay: 0.25s; color: var(--pip-pink); }
+[data-theme="midnight"] .n3.bobbing { animation-delay: 0.4s; color: var(--pip-yellow); }
 
 @keyframes noteBob {
   0% { transform: translateY(0px) rotate(0deg); }
@@ -1042,14 +1503,27 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   color: var(--text-muted);
 }
 
+[data-theme="midnight"] .spec-label {
+  color: var(--pip-lavender);
+}
+
 .spec-value {
   font-size: 1.25rem;
   font-weight: bold;
   color: var(--text-main);
 }
 
+[data-theme="midnight"] .spec-value {
+  color: #FFF8F1;
+}
+
 .mood-sleepy {
   color: var(--pip-berry);
+}
+
+[data-theme="midnight"] .mood-sleepy {
+  color: var(--pip-pink);
+  text-shadow: 0 0 8px rgba(247, 214, 224, 0.45);
 }
 
 .lullaby-chimes-row {
@@ -1061,6 +1535,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .chimes-heading {
   font-size: 1.05rem;
   color: var(--pip-berry);
+}
+
+[data-theme="midnight"] .chimes-heading {
+  color: var(--pip-yellow);
+  text-shadow: 0 0 8px rgba(252, 231, 162, 0.3);
 }
 
 .chimes-list {
@@ -1080,11 +1559,24 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   border-radius: 6px;
   box-shadow: 2px 2px 0px var(--pip-brown);
   cursor: pointer;
-  transition: all 0.1s ease;
+  transition: all 0.12s ease;
+}
+
+[data-theme="midnight"] .chime-pin-btn {
+  background: #201830;
+  border: 1.5px solid #4D396B;
+  box-shadow: 2px 2px 0px #0D0914;
 }
 
 .chime-pin-btn:hover {
   background: var(--pip-yellow);
+  transform: translateY(-2px);
+}
+
+[data-theme="midnight"] .chime-pin-btn:hover {
+  background: #3B2A58;
+  border-color: var(--pip-yellow);
+  box-shadow: 0 0 10px rgba(252, 231, 162, 0.35), 2px 2px 0px #0D0914;
   transform: translateY(-2px);
 }
 
@@ -1094,9 +1586,19 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   box-shadow: none;
 }
 
+[data-theme="midnight"] .chime-pin-btn.active-pin {
+  background: var(--pip-berry);
+  border-color: var(--pip-yellow);
+  box-shadow: 0 0 14px rgba(247, 214, 224, 0.55);
+}
+
 .pin-symbol {
   color: var(--pip-berry);
   font-size: 0.8rem;
+}
+
+[data-theme="midnight"] .pin-symbol {
+  color: var(--pip-yellow);
 }
 
 .pin-name {
@@ -1104,9 +1606,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   color: var(--pip-brown);
 }
 
+[data-theme="midnight"] .pin-name {
+  color: #FFF8F1;
+}
+
 .pin-sub {
   font-size: 0.95rem;
   color: var(--text-muted);
+}
+
+[data-theme="midnight"] .pin-sub {
+  color: var(--pip-lavender);
 }
 
 .lullaby-controls-bar {
@@ -1121,6 +1631,31 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .play-lullaby-btn {
   padding: 10px 20px;
   font-size: 0.78rem;
+}
+
+[data-theme="midnight"] .play-lullaby-btn {
+  background: var(--pip-berry);
+  border: 2px solid var(--pip-yellow);
+  color: #FFF8F1;
+  box-shadow: 3px 3px 0px #0D0914, 0 0 12px rgba(163, 64, 99, 0.35);
+}
+
+[data-theme="midnight"] .play-lullaby-btn:hover {
+  background: var(--pip-berry-light);
+  box-shadow: 4px 4px 0px #0D0914, 0 0 18px rgba(163, 64, 99, 0.55);
+}
+
+[data-theme="midnight"] .sound-indicator-btn {
+  background: #201830;
+  border: 1.5px solid #523E72;
+  color: #FFF8F1;
+  box-shadow: 2px 2px 0px #0D0914;
+}
+
+[data-theme="midnight"] .sound-indicator-btn:hover {
+  background: #332345;
+  border-color: var(--pip-yellow);
+  color: var(--pip-yellow);
 }
 
 /* Phase 3: Project 02 — Dream Delivery Routes Styles (Master Spec Section 12) */
@@ -1285,12 +1820,24 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .status-val {
   font-size: 0.82rem;
-  color: var(--pip-brown);
+  color: var(--text-main);
 }
 
 .status-val.status-active {
   color: var(--pip-green);
   font-weight: bold;
+}
+
+[data-theme="midnight"] .status-label {
+  color: #B5A6C9;
+}
+
+[data-theme="midnight"] .status-val {
+  color: #F8EBDD;
+}
+
+[data-theme="midnight"] .status-val.status-active {
+  color: #A5D6A7;
 }
 
 .lamp-story {
@@ -1747,6 +2294,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   }
 
   .pip-desktop-icons {
+    position: static;
     flex-direction: row;
     overflow-x: auto;
     width: 100%;
@@ -1757,34 +2305,64 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
   .desktop-icon-btn {
     flex-shrink: 0;
-    width: 72px;
+    min-width: 76px;
+    width: auto;
+    padding: 6px 8px;
   }
 
   .pip-hero-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 20px;
   }
 
   .pip-portrait-wrapper {
-    max-width: 240px;
+    max-width: 250px;
     margin: 0 auto;
+    width: 100%;
   }
 
   .pip-hero-bio {
-    align-items: center;
-    text-align: center;
+    align-items: stretch;
+    text-align: left;
+    width: 100%;
   }
 
   .hero-identity {
-    align-items: center;
+    align-items: flex-start;
   }
 
   .nursery-badge {
-    align-self: center;
+    align-self: flex-start;
   }
 
   .enter-dreamspace-btn {
-    align-self: center;
+    width: 100%;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-name {
+    font-size: 2.5rem;
+  }
+
+  .hero-role {
+    font-size: 1.3rem;
+  }
+
+  .queue-body {
+    padding: 8px 10px;
+  }
+
+  .queue-desc {
+    font-size: 0.8rem;
+  }
+
+  .enter-dreamspace-btn {
+    font-size: 0.72rem;
+    padding: 12px 8px;
+    gap: 6px;
+    white-space: nowrap;
   }
 }
 
@@ -1873,6 +2451,153 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
   .pip-button {
     min-height: 44px; /* Accessible touch target */
+  }
+}
+
+/* PipOS System Notification Window */
+.pip-system-notification {
+  position: fixed;
+  bottom: 60px;
+  right: 24px;
+  z-index: 1050;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  filter: drop-shadow(0 6px 18px rgba(92, 64, 51, 0.25));
+}
+
+.notification-window {
+  box-shadow: 4px 4px 0px var(--pip-brown) !important;
+}
+
+.notification-header {
+  background: var(--pip-berry) !important;
+  color: #FFF8F1 !important;
+}
+
+.notification-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--window-bg);
+}
+
+.notification-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.queue-badge {
+  color: var(--pip-berry);
+  font-weight: bold;
+}
+
+[data-theme="midnight"] .queue-badge {
+  color: #E8C978;
+}
+
+.notification-title {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+[data-theme="midnight"] .notification-title {
+  color: #F8EBDD;
+}
+
+.notification-text {
+  font-size: 0.92rem;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+[data-theme="midnight"] .notification-text {
+  color: #F8EBDD;
+}
+
+[data-theme="midnight"] .notification-window {
+  border-color: #5A4373;
+  box-shadow: 4px 4px 0px #0F0B18 !important;
+}
+
+[data-theme="midnight"] .notification-header {
+  background: #2C2235 !important;
+  border-bottom-color: #5A4373;
+  color: #E8C978 !important;
+}
+
+.notification-cta-btn {
+  margin-top: 6px;
+  width: 100%;
+  justify-content: center;
+  padding: 10px;
+  font-size: 0.8rem;
+}
+
+/* Background Atmosphere: Drifting Starmotes */
+.drifting-starmote {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(252, 231, 162, 0.55) 0%, rgba(247, 214, 224, 0.25) 50%, transparent 75%);
+  filter: blur(2px);
+}
+
+.drifting-starmote.m1 {
+  width: 180px;
+  height: 180px;
+  top: 15%;
+  left: 5%;
+  animation: gentleDrift 32s infinite ease-in-out alternate;
+}
+
+.drifting-starmote.m2 {
+  width: 240px;
+  height: 240px;
+  top: 60%;
+  right: 5%;
+  animation: gentleDrift 40s infinite ease-in-out alternate-reverse;
+}
+
+@keyframes gentleDrift {
+  0% {
+    transform: translate(0px, 0px) scale(0.9);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.08);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-25px, 25px) scale(0.95);
+    opacity: 0.45;
+  }
+}
+
+.easter-msg-access {
+  font-size: 0.78rem;
+  color: var(--pip-brown-light);
+  letter-spacing: 1px;
+}
+
+.easter-heart {
+  color: var(--pip-pink);
+  font-size: 1.3rem;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .pip-system-notification {
+    left: 12px;
+    right: 12px;
+    bottom: 56px;
+    width: auto;
   }
 }
 

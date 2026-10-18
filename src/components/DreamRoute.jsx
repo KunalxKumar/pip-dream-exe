@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Sparkles } from 'lucide-react';
 import WindowPanel from './WindowPanel';
@@ -9,6 +9,13 @@ export default function DreamRoute() {
   const [selectedDream, setSelectedDream] = useState(dreamPackets[0]);
   const [routeState, setRouteState] = useState('IDLE'); // IDLE, ROUTING, DELIVERED
   const [pipStep, setPipStep] = useState(0);
+  const timeoutsRef = useRef([]);
+
+  useEffect(() => {
+    return () => {
+      timeoutsRef.current.forEach(clearTimeout);
+    };
+  }, []);
 
   // SVG Waypoint coordinates on the celestial dream map
   // Follows the spec diagram:
@@ -40,8 +47,11 @@ export default function DreamRoute() {
     setRouteState('ROUTING');
     setPipStep(0);
 
+    timeoutsRef.current.forEach(clearTimeout);
+    timeoutsRef.current = [];
+
     deliveryPathIndices.forEach((nodeIdx, stepIdx) => {
-      setTimeout(() => {
+      const id = setTimeout(() => {
         setPipStep(stepIdx);
         playClickSound();
         if (stepIdx === deliveryPathIndices.length - 1) {
@@ -49,6 +59,7 @@ export default function DreamRoute() {
           playChimeSound();
         }
       }, stepIdx * 800);
+      timeoutsRef.current.push(id);
     });
   };
 

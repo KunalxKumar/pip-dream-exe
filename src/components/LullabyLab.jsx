@@ -81,7 +81,7 @@ export default function LullabyLab() {
   return (
     <WindowPanel
       title="PROJECT 01 — LULLABY LAB"
-      icon={<Music size={14} color="var(--pip-berry)" />}
+      icon={<Music size={14} color="var(--window-header-icon, var(--pip-berry))" />}
       statusText="FREQ: 432 Hz SLEEP HARMONICS • 68 BPM"
       className="lullaby-window"
     >
@@ -160,12 +160,12 @@ export default function LullabyLab() {
           >
             {isMuted ? (
               <>
-                <VolumeX size={14} color="var(--pip-berry)" />
+                <VolumeX size={14} color="currentColor" />
                 <span className="font-mono">🔇 SOUND OFF</span>
               </>
             ) : (
               <>
-                <Volume2 size={14} color="var(--pip-berry)" />
+                <Volume2 size={14} color="currentColor" />
                 <span className="font-mono">🔊 SOUND ON</span>
               </>
             )}
