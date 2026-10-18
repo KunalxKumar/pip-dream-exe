@@ -102,7 +102,7 @@ export default function StoryScene() {
         {/* Progress Timeline Header */}
         <div className="story-timeline-bar">
           <div className="timeline-clock-badge font-mono">
-            <span className="clock-time">{scene.time}</span>
+            <span className="clock-time">[ {scene.time} ]</span>
             <span className="clock-loc">{scene.location}</span>
           </div>
 
@@ -128,15 +128,15 @@ export default function StoryScene() {
 
           <button
             type="button"
-            className="pip-button pip-button-soft autoplay-toggle-btn"
+            className={`pip-button autoplay-toggle-btn ${isAutoPlaying ? 'pip-button-primary' : 'pip-button-soft'}`}
             onClick={() => {
               playClickSound();
               setIsAutoPlaying(!isAutoPlaying);
             }}
-            title={isAutoPlaying ? 'Pause cinematic progression' : 'Play cinematic progression'}
+            title={isAutoPlaying ? 'Pause automatic chronicle playback' : 'Play automatic chronicle playback'}
           >
             {isAutoPlaying ? <Pause size={12} /> : <Play size={12} />}
-            <span className="font-pixel">{isAutoPlaying ? 'PAUSE' : 'CINEMATIC'}</span>
+            <span className="font-pixel">{isAutoPlaying ? 'AUTO-LOG: ON' : 'AUTO-LOG: OFF'}</span>
           </button>
         </div>
 
@@ -210,6 +210,7 @@ export default function StoryScene() {
                     <div className="verdict-stamp font-mono">
                       <span>MIDNIGHT NURSERY</span>
                       <span>01:03</span>
+                      <span className="zero-loss-badge font-pixel">✦ 100% ZERO-LOSS CELESTIAL GUARANTEE</span>
                     </div>
                     <p className="verdict-quote font-retro">
                       GOODNIGHT, LITTLE DREAMER.

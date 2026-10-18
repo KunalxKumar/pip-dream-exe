@@ -9,28 +9,22 @@ You are performing the heavy lifting under the direction of Antigravity.
 - **Step 2 (Phase 1 & 3)**: Desktop shell & sticky sidebar dock overhauled (`src/components/Desktop.jsx`, `src/App.jsx`).
 - **Step 3 (Phase 2)**: Hero window balanced, Dream Queue native status panel built, and WCAG AA contrast fixed (`src/components/Pip.jsx`).
 - **Step 4 (Phase 4)**: Interactive mini-app previews in `src/components/ProjectCard.jsx` and `src/index.css`.
-- **Git State**: Clean commit `3d6eb6d`.
+- **Step 5 (Phase 5)**: System Notification Window polished into authentic 1998 alert dialog with dual actions (`[ HELP PIP ]` and `[ LATER ]`).
+- **Git State**: Clean commit `8bfee87`.
 
 ---
 
-## YOUR CURRENT TASK: STEP 5 — System Notification Window Polish (Phase 5)
+## YOUR CURRENT TASK: STEP 6 — Origin Story & Bedtime Laboratory Polish (Phase 6)
 
-Polish the system notification popup in `src/components/SystemNotification.jsx` and `src/index.css` into an authentic 1998 OS alert dialog:
-
-### Specifications:
-1. **Window Frame**:
-   - Give it an authentic 1998-era system message dialog aesthetic (classic beveled or clean pixel borders matching `WindowPanel`).
-   - Title bar: `✦ PIPOS SYSTEM MESSAGE` with alert icon and close `[ X ]` button.
-2. **Telemetry & Content**:
-   - Status tag: `● PRIORITY PACKET` with timestamp `23:47`.
-   - Clear retro header: `1 DREAM IS WAITING.`
-   - Cozy message text: `Someone forgot how to sleep under the starlight.`
-3. **Actions & Polish**:
-   - Primary action button: `[ ✦ HELP PIP ]` (navigates/triggers dream dispatch on click).
-   - Dismiss button: `[ LATER ]` or `[ X ]` with sound effect.
-   - Smooth entrance/exit transitions with Framer Motion.
-   - Ensure WCAG AA contrast compliance in both Day and Midnight themes.
-4. **Verification**:
+Polish the remaining two major sections:
+1. **Pip's Origin Chronicle (`src/components/StoryScene.jsx`)**:
+   - Ensure the timeline log feels like cozy retro log telemetry (`TIMESTAMP: 23:47 → 01:03`).
+   - Enhance the scene navigator controls (`< PREV`, `NEXT >`, `[ AUTO-PLAY ]`).
+   - Polish Scene 6's "Section 15 WOW MOMENT" sequence (signal locked, delivery routing, zero dream loss guarantee).
+2. **Bedtime Workbenches (`src/components/Workbench.jsx` and sub-labs)**:
+   - Ensure the tab switching (`LULLABY SYNTH`, `ROUTE MAP`, `NIGHTLIGHTS`) has authentic 1998 tab styling.
+   - Verify WCAG AA contrast across all laboratory controls and meters.
+3. **Verification**:
    - Run `npm run build` and `npx oxlint src` — must finish with 0 errors.
 
 Execute this task now.
