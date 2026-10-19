@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Music, MapPin, Lamp, Sparkles, Send, Lightbulb, Play, Check } from 'lucide-react';
-import WindowPanel from './WindowPanel';
 import { playClickSound, playMusicBoxNote, playChimeSound } from '../utils/audio';
 
 const iconMap = {
@@ -53,16 +52,14 @@ export default function ProjectCard({ project, onInteract }) {
   };
 
   return (
-    <WindowPanel
-      title={`PROJECT ${project.num} — ${project.title}`}
-      icon={<IconComponent size={14} color="var(--pip-berry)" />}
-      statusText={`SYS_STATE: ${project.meta.status || 'ONLINE'}`}
-      className="project-window"
-    >
+    <div className="project-card-container pip-card-panel">
       <div className="project-card-content">
         <div className="project-card-header">
           <div className="project-badge-row">
-            <span className="pip-tag font-pixel">PROJECT {project.num}</span>
+            <span className="pip-tag font-pixel" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <IconComponent size={12} />
+              <span>PROJECT {project.num}</span>
+            </span>
             <span className="project-status-dot font-mono">● READY</span>
           </div>
           <h3 className="project-card-title font-retro">{project.title}</h3>
@@ -197,6 +194,6 @@ export default function ProjectCard({ project, onInteract }) {
           <span>[ {project.actionLabel} ]</span>
         </button>
       </div>
-    </WindowPanel>
+    </div>
   );
 }

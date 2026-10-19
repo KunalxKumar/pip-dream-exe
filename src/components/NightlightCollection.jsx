@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Lamp, Check } from 'lucide-react';
-import WindowPanel from './WindowPanel';
+import { Sparkles, Check } from 'lucide-react';
 import { nightlightsData } from '../data/projectsData';
 import { playClickSound, playChimeSound } from '../utils/audio';
 
@@ -92,12 +91,7 @@ export default function NightlightCollection({ onNightlightGlow, onNightlightCom
   };
 
   return (
-    <WindowPanel
-      title="PROJECT 03 — NIGHTLIGHT COLLECTION"
-      icon={<Lamp size={14} color="var(--pip-berry)" />}
-      statusText={`AMBIANCE: CONNECTED TO MIDNIGHT NURSERY SKY ${completed ? '• ✓ LIT' : ''}`}
-      className="nightlight-window"
-    >
+    <div className="nightlight-collection-container">
       <div className="nightlight-collection-grid">
         {nightlightsData.map((lamp) => {
           const isThisActive = activeLampId === lamp.id && isLampLit;
@@ -150,6 +144,6 @@ export default function NightlightCollection({ onNightlightGlow, onNightlightCom
           <Check size={12} /> Nightlight nursery ambiance successfully activated!
         </div>
       )}
-    </WindowPanel>
+    </div>
   );
 }

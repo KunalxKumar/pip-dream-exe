@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Music, Play, Pause, Volume2, VolumeX, Check } from 'lucide-react';
-import WindowPanel from './WindowPanel';
+import { Play, Pause, Volume2, VolumeX, Check } from 'lucide-react';
 import { playMusicBoxNote, playClickSound, playChimeSound, getAudioMuted, setAudioMuted } from '../utils/audio';
 
 export default function LullabyLab({ onLullabyComplete, isCompleted = false }) {
@@ -83,12 +82,7 @@ export default function LullabyLab({ onLullabyComplete, isCompleted = false }) {
   };
 
   return (
-    <WindowPanel
-      title="PROJECT 01 — LULLABY LAB"
-      icon={<Music size={14} color="var(--window-header-icon, var(--pip-berry))" />}
-      statusText={`FREQ: 432 Hz SLEEP HARMONICS • 68 BPM ${completed ? '• ✓ HARMONIZED' : ''}`}
-      className="lullaby-window"
-    >
+    <div className="lullaby-lab-container">
       <div className="lullaby-spec-card">
         {/* Animated Musical Wave & Notes */}
         <div className="lullaby-visual-stage">
@@ -185,6 +179,6 @@ export default function LullabyLab({ onLullabyComplete, isCompleted = false }) {
           )}
         </div>
       </div>
-    </WindowPanel>
+    </div>
   );
 }

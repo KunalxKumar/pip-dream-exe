@@ -17,6 +17,7 @@ export default function WindowPanel({
   isMinimized = false,
   isActive = false,
   position = { x: 80, y: 80 },
+  width = 720,
   zIndex = 100,
   onPositionChange,
 }) {
@@ -76,6 +77,8 @@ export default function WindowPanel({
     position: 'absolute',
     left: `${position.x}px`,
     top: `${position.y}px`,
+    width: `${width}px`,
+    maxWidth: 'calc(100vw - 160px)',
     zIndex: zIndex,
   };
 

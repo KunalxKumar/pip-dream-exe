@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sparkles, Heart, ArrowDown, Activity, Check } from 'lucide-react';
-import WindowPanel from './WindowPanel';
+import { Sparkles, ArrowDown, Activity, Check } from 'lucide-react';
 import { useMousePosition } from '../hooks/useMousePosition';
 import { playClickSound, playChimeSound } from '../utils/audio';
 
@@ -65,16 +64,7 @@ export default function Pip({
   }
 
   return (
-    <WindowPanel
-      title="PIP.DREAM.EXE — SYSTEM RESIDENT"
-      icon={<Heart size={14} color="var(--pip-berry)" />}
-      statusText={
-        isSleeping
-          ? 'LOCATION: SLEEPING • STATUS: DREAM DELIVERED (01:03) • Zzz...'
-          : 'LOCATION: MIDNIGHT NURSERY • STATUS: ON DUTY • BEDTIME: 01:03'
-      }
-      className="pip-hero-window"
-    >
+    <div className="pip-hero-window-content">
       <div className="pip-hero-grid">
         {/* Left Column: Pip Portrait with reactive expressions */}
         <div className="pip-portrait-wrapper" ref={portraitRef}>
@@ -272,6 +262,6 @@ export default function Pip({
           </div>
         </div>
       </div>
-    </WindowPanel>
+    </div>
   );
 }

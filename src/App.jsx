@@ -39,7 +39,7 @@ export default function App() {
     toggleMinimize,
     focusWindow,
     updateWindowPosition,
-  } = useWindowManager(['hero', 'projects']);
+  } = useWindowManager(['hero']);
 
   // Trigger system notification 800ms after boot finishes
   const handleBootComplete = () => {
@@ -195,6 +195,7 @@ export default function App() {
                   isMinimized={!!minimizedIds[appId]}
                   isActive={activeWindowId === appId}
                   position={windowPositions[appId] || { x: 80, y: 80 }}
+                  width={app.width}
                   zIndex={zIndices[appId] || 100}
                   onFocus={focusWindow}
                   onPositionChange={updateWindowPosition}

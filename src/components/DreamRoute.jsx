@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Sparkles, Check } from 'lucide-react';
-import WindowPanel from './WindowPanel';
+import { Sparkles, Check } from 'lucide-react';
 import { dreamPackets } from '../data/dreamsData';
 import { playClickSound, playChimeSound } from '../utils/audio';
 
@@ -57,12 +56,7 @@ export default function DreamRoute({ onRouteComplete, isCompleted = false }) {
   const currentCoords = waypoints[deliveryPathIndices[pipStep]];
 
   return (
-    <WindowPanel
-      title="PROJECT 02 — DREAM DELIVERY ROUTES"
-      icon={<Send size={14} color="var(--pip-berry)" />}
-      statusText={`ROUTE ENGINE: ${routeState === 'ROUTING' ? 'DELIVERING...' : routeState === 'DELIVERED' ? '✓ DELIVERY SUCCESS' : 'ROUTE LOCKED'}`}
-      className="dream-route-window"
-    >
+    <div className="dream-route-container">
       <div className="dream-route-showcase">
         {/* Packet selection bar */}
         <div className="route-packet-selector">
@@ -212,6 +206,6 @@ export default function DreamRoute({ onRouteComplete, isCompleted = false }) {
           </div>
         </div>
       </div>
-    </WindowPanel>
+    </div>
   );
 }
