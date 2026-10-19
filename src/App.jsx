@@ -16,12 +16,19 @@ import { projectsData } from './data/projectsData';
 import { appsData } from './data/appsData';
 import { useWindowManager } from './hooks/useWindowManager';
 import { useDreamMission } from './hooks/useDreamMission';
+import { useViewportMode } from './hooks/useViewportMode';
+import ThemeToggle from './components/ThemeToggle';
+import SoundToggle from './components/SoundToggle';
+import { playClickSound } from './utils/audio';
 
 export default function App() {
   const [hasBooted, setHasBooted] = useState(false);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [focusedGaze, setFocusedGaze] = useState(null);
+
+  // Initialize Viewport Mode Hook for Responsive Chaos
+  const viewportInfo = useViewportMode();
 
   // Initialize Dream Mission State Hook
   const missionState = useDreamMission();
@@ -170,6 +177,72 @@ export default function App() {
           <div className="drifting-starmote m2" />
         </div>
 
+        {/* Pocket PipOS Header & App Dock (for mobile viewports <= 768px) */}
+        {viewportInfo.isMobile && (
+          <header className="pocket-pipos-header" aria-label="Pocket PipOS Mobile Interface">
+            <div className="pocket-header-top">
+              <div className="pocket-brand">
+                <span className="pocket-title font-pixel">♥ PIPOS POCKET</span>
+                <span className="pocket-tag font-pixel" title={viewportInfo.chaosMessage}>
+                  {viewportInfo.chaosTag}
+                </span>
+              </div>
+              <div className="pocket-toggles">
+                <ThemeToggle />
+                <SoundToggle />
+              </div>
+            </div>
+
+            <div className="pocket-sub-bar font-pixel">
+              <div className="pocket-mission-badge" title="Pip's Bedtime Mission State">
+                <span className="mission-star">★</span>
+                <span>MISSION: {missionState.completedCount}/4 COMPLETE</span>
+              </div>
+              <div className="pocket-res-badge font-mono" title={viewportInfo.resolutionTitle}>
+                <span>{viewportInfo.width}x{viewportInfo.height}</span>
+              </div>
+            </div>
+
+            {/* Playful Retro Chaos Status Ticker */}
+            <div className="pocket-chaos-ticker font-pixel" role="status" aria-live="polite">
+              <span className="ticker-sparkle">✦</span>
+              <span className="ticker-text">{viewportInfo.chaosMessage}</span>
+              <span className="ticker-sparkle">✦</span>
+            </div>
+
+            {/* Pocket Application Quick Launch Dock */}
+            <nav className="pocket-app-dock" aria-label="Pocket PipOS Applications">
+              {appsData.map((app) => {
+                const isActive = activeWindowId === app.id && !minimizedIds[app.id];
+                return (
+                  <button
+                    key={app.id}
+                    type="button"
+                    className={`pocket-dock-item ${isActive ? 'is-active' : ''}`}
+                    onClick={() => {
+                      playClickSound();
+                      if (app.id === 'secret') {
+                        setEasterEggOpen(true);
+                      } else {
+                        openWindow(app.id);
+                        if (app.id === 'dream-memory') {
+                          setNotificationOpen(false);
+                        }
+                      }
+                    }}
+                    aria-label={`Open ${app.title}`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    <span className="dock-icon">{app.emoji}</span>
+                    <span className="dock-label font-pixel">{app.shortLabel}</span>
+                    {isActive && <span className="dock-active-indicator" aria-hidden="true" />}
+                  </button>
+                );
+              })}
+            </nav>
+          </header>
+        )}
+
         {/* 90s Desktop Workspace with Left Icons */}
         <div className="pip-desktop-layout">
           <Desktop
@@ -236,6 +309,7 @@ export default function App() {
           onWindowTabClick={toggleMinimize}
           onStartAppOpen={handleStartAppOpen}
           onOpenEasterEgg={() => setEasterEggOpen(true)}
+          viewportInfo={viewportInfo}
         />
 
         {/* System Message Notification Dialog */}

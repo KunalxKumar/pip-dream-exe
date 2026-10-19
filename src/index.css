@@ -535,17 +535,41 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   font-weight: bold;
 }
 
-/* Responsive mobile adjustments */
+/* Responsive Taskbar adjustments across breakpoints */
+@media (max-width: 1023px) {
+  .tray-visitor-counter,
+  .tray-patch-item {
+    display: none !important;
+  }
+}
+
 @media (max-width: 768px) {
-  .taskbar-quick-links {
-    display: none;
-  }
   .pip-taskbar {
-    padding: 0 8px;
-    height: 44px;
+    padding: 0 6px;
+    height: 46px;
   }
-  .taskbar-start-btn span {
-    display: none;
+  .taskbar-left, .taskbar-right {
+    gap: 4px;
+  }
+  .taskbar-start-btn {
+    padding: 4px 8px;
+    font-size: 0.68rem;
+  }
+  .taskbar-window-tab {
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .taskbar-tray-item {
+    padding: 3px 6px;
+    font-size: 0.68rem;
+  }
+  .taskbar-theme-toggle,
+  .taskbar-sound-toggle {
+    display: none !important;
   }
 }
 
@@ -2562,45 +2586,363 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   font-size: 1.15rem;
 }
 
-/* Mobile & Tablet Responsiveness (Rule 6: 375px, 390px, 430px, 768px, 1024px+) */
-@media (max-width: 900px) {
+/* ============================================================
+   RESPONSIVE CHAOS MODE: POCKET PIPOS & ADAPTIVE METAPHOR
+   ============================================================ */
+
+/* Pocket PipOS Top Header (Mobile <= 768px) */
+.pocket-pipos-header {
+  background: var(--window-bg);
+  border-bottom: 2px solid var(--pip-brown);
+  box-shadow: 0 2px 6px rgba(92, 64, 51, 0.15);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+}
+
+.pocket-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.pocket-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pocket-title {
+  font-size: 0.88rem;
+  font-weight: bold;
+  color: var(--pip-brown);
+  letter-spacing: 0.5px;
+}
+
+.pocket-tag {
+  background: var(--pip-pink);
+  color: var(--pip-brown);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  border: 1px solid var(--pip-brown);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.pocket-toggles {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pocket-sub-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--pip-cream);
+  border: 1.5px solid var(--pip-brown);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.72rem;
+}
+
+.pocket-mission-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--pip-berry);
+  font-weight: bold;
+}
+
+.pocket-mission-badge .mission-star {
+  color: var(--pip-yellow);
+  text-shadow: 0 0 2px var(--pip-brown);
+}
+
+.pocket-res-badge {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+}
+
+/* Playful Retro Chaos Status Ticker */
+.pocket-chaos-ticker {
+  background: var(--pip-yellow);
+  color: var(--pip-brown);
+  border: 1.5px solid var(--pip-brown);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 0.68rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  box-shadow: 1px 1px 0px var(--pip-brown);
+  letter-spacing: 0.5px;
+}
+
+.pocket-chaos-ticker .ticker-sparkle {
+  color: var(--pip-berry);
+  animation: starTwinkle 1s infinite alternate;
+}
+
+/* Pocket Application Quick Launch Dock */
+.pocket-app-dock {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 2px 2px 2px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.pocket-app-dock::-webkit-scrollbar {
+  display: none;
+}
+
+.pocket-dock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 58px;
+  flex-shrink: 0;
+  padding: 6px 4px;
+  min-height: 48px;
+  background: var(--window-bg);
+  border: 1.5px solid var(--pip-brown);
+  border-radius: 6px;
+  box-shadow: 1px 1px 0px var(--pip-brown);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  position: relative;
+  user-select: none;
+}
+
+.pocket-dock-item:hover,
+.pocket-dock-item:active {
+  background: var(--pip-cream);
+  transform: translateY(-1px);
+}
+
+.pocket-dock-item.is-active {
+  background: var(--pip-pink);
+  border-color: var(--pip-berry);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+}
+
+.pocket-dock-item .dock-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.pocket-dock-item .dock-label {
+  font-size: 0.65rem;
+  color: var(--pip-brown);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pocket-dock-item.is-active .dock-label {
+  font-weight: bold;
+  color: var(--pip-berry);
+}
+
+.dock-active-indicator {
+  position: absolute;
+  bottom: 2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--pip-berry);
+}
+
+/* Midnight Theme Adjustments for Pocket PipOS */
+[data-theme="midnight"] .pocket-pipos-header {
+  background: #171123;
+  border-bottom-color: #523E72;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="midnight"] .pocket-title {
+  color: #FCE7A2;
+}
+
+[data-theme="midnight"] .pocket-tag {
+  background: #3B2A58;
+  color: #FCE7A2;
+  border-color: #523E72;
+}
+
+[data-theme="midnight"] .pocket-sub-bar {
+  background: #211A2D;
+  border-color: #5A4373;
+}
+
+[data-theme="midnight"] .pocket-mission-badge {
+  color: #E8C978;
+}
+
+[data-theme="midnight"] .pocket-chaos-ticker {
+  background: #2E2038;
+  color: #FCE7A2;
+  border-color: #FCE7A2;
+}
+
+[data-theme="midnight"] .pocket-dock-item {
+  background: #211A2D;
+  border-color: #5A4373;
+  color: #F8EBDD;
+  box-shadow: 1px 1px 0px #0F0B18;
+}
+
+[data-theme="midnight"] .pocket-dock-item:hover,
+[data-theme="midnight"] .pocket-dock-item:active {
+  background: #2C2235;
+  border-color: var(--pip-yellow);
+}
+
+[data-theme="midnight"] .pocket-dock-item.is-active {
+  background: var(--pip-berry);
+  border-color: var(--pip-yellow);
+  box-shadow: 0 0 10px rgba(163, 64, 99, 0.45);
+}
+
+[data-theme="midnight"] .pocket-dock-item .dock-label {
+  color: #F8EBDD;
+}
+
+[data-theme="midnight"] .pocket-dock-item.is-active .dock-label {
+  color: #FFF8F1;
+}
+
+[data-theme="midnight"] .dock-active-indicator {
+  background: var(--pip-yellow);
+}
+
+/* ============================================================
+   TABLET BREAKPOINT: 769px – 1023px
+   ============================================================ */
+@media (min-width: 769px) and (max-width: 1023px) {
   .pip-desktop-layout {
-    flex-direction: column;
-    padding: 12px 12px 70px 12px;
     gap: 16px;
+    padding: 16px 20px 68px 20px;
+    max-width: 100%;
   }
 
   .pip-desktop-icons {
-    position: static;
-    flex-direction: row;
-    overflow-x: auto;
-    width: 100%;
-    padding-bottom: 8px;
+    width: 88px;
     gap: 10px;
-    justify-content: flex-start;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .pip-desktop-icons::-webkit-scrollbar {
-    display: none;
   }
 
   .desktop-icon-btn {
-    flex-shrink: 0;
-    min-width: 76px;
-    width: auto;
-    padding: 8px 10px;
+    padding: 6px 4px;
     min-height: 44px;
+  }
+
+  .icon-graphic {
+    width: 42px;
+    height: 42px;
+  }
+
+  .icon-label {
+    font-size: 0.85rem;
+  }
+
+  .pip-windows-canvas {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pip-window {
+    max-width: 100% !important;
+  }
+
+  .tray-visitor-counter,
+  .tray-patch-item {
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   MOBILE BREAKPOINT: <= 768px (Pocket PipOS Mode)
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Hide the desktop left icon column — replaced by Pocket App Dock */
+  .pip-desktop-icons {
+    display: none !important;
+  }
+
+  .pip-desktop-layout {
+    flex-direction: column;
+    padding: 8px 10px 58px 10px;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .pip-windows-canvas {
+    width: 100%;
+    padding: 0;
+  }
+
+  .pip-window {
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 12px 0;
+    box-sizing: border-box;
+  }
+
+  .pip-window-header {
+    padding: 6px 8px;
+  }
+
+  .pip-window-title {
+    font-size: 0.68rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .pip-window-btn {
+    min-width: 34px;
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pip-window-body {
+    padding: 12px 10px;
+    overflow-x: hidden;
+  }
+
+  .pip-status-bar {
+    padding: 4px 8px;
+    font-size: 0.68rem;
+  }
+
+  .pip-status-system-tag {
+    display: none;
   }
 
   .pip-hero-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
   }
 
   .pip-portrait-wrapper {
-    max-width: 240px;
+    max-width: 200px;
     margin: 0 auto;
     width: 100%;
   }
@@ -2615,55 +2957,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     align-items: flex-start;
   }
 
-  .nursery-badge {
-    align-self: flex-start;
-  }
-
   .enter-dreamspace-btn {
     width: 100%;
-    white-space: nowrap;
     min-height: 44px;
   }
 
-  .workbench-selector-bar {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    padding-bottom: 4px;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .workbench-selector-bar .pip-button {
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-name {
-    font-size: 2.2rem;
-  }
-
-  .hero-role {
-    font-size: 1.2rem;
-  }
-
-  .queue-body {
-    padding: 8px 10px;
-  }
-
-  .queue-desc {
-    font-size: 0.8rem;
-  }
-
-  .enter-dreamspace-btn {
-    font-size: 0.72rem;
-    padding: 12px 8px;
-    gap: 6px;
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 600px) {
   .projects-grid {
     grid-template-columns: 1fr;
   }
@@ -2681,7 +2979,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .lullaby-visual-stage {
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     text-align: center;
   }
 
@@ -2701,6 +2999,28 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
   .dispatch-btn {
     width: 100%;
+    min-height: 44px;
+  }
+
+  /* Make Story scene timeline pills horizontally scrollable on mobile */
+  .timeline-steps {
+    display: flex !important;
+    overflow-x: auto;
+    max-width: 100%;
+    gap: 4px;
+    padding: 2px 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .timeline-steps::-webkit-scrollbar {
+    display: none;
+  }
+
+  .timeline-step-pill {
+    flex-shrink: 0;
+    min-height: 36px;
+    padding: 4px 8px;
   }
 
   .goodnight-footer {
@@ -2710,30 +3030,28 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   }
 }
 
-/* Tightest mobile breakpoint: 375px - 430px */
+/* ============================================================
+   TIGHTEST MOBILE BREAKPOINT: <= 430px
+   ============================================================ */
 @media (max-width: 430px) {
   .hero-name {
-    font-size: 1.9rem;
+    font-size: 1.85rem;
   }
 
   .hero-role {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
   .quote-text {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
 
   .pip-portrait-wrapper {
-    max-width: 190px;
-  }
-
-  .pip-window-header {
-    padding: 6px 8px;
+    max-width: 170px;
   }
 
   .pip-window-title {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
   }
 
   .timeline-clock-badge {
@@ -2742,21 +3060,66 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     gap: 2px;
   }
 
-  .timeline-steps {
-    display: none; /* Hide wide step pill list on tiny screens to avoid squishing */
-  }
-
   .pip-button {
-    min-height: 44px; /* Accessible touch target */
+    min-height: 44px;
   }
 
-  .taskbar-quick-launch {
-    display: none; /* Hide redundant taskbar shortcuts on small mobile screens */
+  .chimes-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
   }
 
-  .pip-taskbar {
-    height: 48px;
-    padding: 0 8px;
+  .chime-pin-btn {
+    min-height: 44px;
+    padding: 6px 2px;
+  }
+
+  .pocket-dock-item {
+    min-width: 52px;
+    padding: 4px 2px;
+  }
+}
+
+/* ============================================================
+   LANDSCAPE MOBILE BREAKPOINT (<= 520px height)
+   ============================================================ */
+@media (max-height: 520px) and (orientation: landscape) {
+  .pocket-pipos-header {
+    padding: 4px 8px;
+    gap: 4px;
+  }
+
+  .pocket-chaos-ticker {
+    display: none; /* Hide ticker to conserve vertical space in landscape */
+  }
+
+  .pocket-dock-item {
+    min-height: 38px;
+    padding: 2px 4px;
+  }
+
+  .pip-desktop-environment {
+    padding-bottom: 50px;
+  }
+}
+
+/* ============================================================
+   WIDESCREEN DESKTOP BREAKPOINT (>= 1440px)
+   ============================================================ */
+@media (min-width: 1440px) {
+  .pip-desktop-layout {
+    max-width: 1400px;
+    gap: 36px;
+    padding: 32px 36px;
+  }
+
+  .pip-desktop-icons {
+    width: 114px;
+    gap: 14px;
+  }
+
+  .desktop-icon-btn {
+    min-height: 48px;
   }
 }
 
@@ -3095,27 +3458,43 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   }
 }
 
-/* Mobile Window Ergonomics: Natural fluid sizing */
-@media (max-width: 768px) {
-  .pip-desktop-layout {
-    flex-direction: column;
-    padding: 10px 10px 64px 10px;
-    gap: 12px;
+/* ============================================================
+   REDUCED MOTION SUPPORT (PREFERS-REDUCED-MOTION)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 
-  .pip-windows-canvas {
-    width: 100%;
-    min-height: auto;
+  .drifting-starmote {
+    display: none !important;
   }
 
-  .pip-window {
-    position: relative !important;
-    left: 0 !important;
-    top: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    max-height: none !important;
-    margin-bottom: 16px;
+  .star-twinkle,
+  .animate-twinkle,
+  .ticker-sparkle {
+    animation: none !important;
+    opacity: 0.7 !important;
+  }
+
+  .animated-route-stroke {
+    stroke-dasharray: none !important;
+    animation: none !important;
+  }
+
+  .note.bobbing {
+    animation: none !important;
+  }
+
+  .mystery-star-btn .moon-glow {
+    animation: none !important;
+  }
+
+  .icon-sparkle-hover {
+    transition: none !important;
   }
 }
 

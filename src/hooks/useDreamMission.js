@@ -42,12 +42,15 @@ export function useDreamMission() {
     currentStage = 'DREAM RECONSTRUCTED';
   }
 
+  const completedCount = [dreamMemoryComplete, lullabyComplete, routeComplete, nightlightComplete].filter(Boolean).length;
+
   return {
     dreamMemoryComplete,
     lullabyComplete,
     routeComplete,
     nightlightComplete,
     dreamDelivered,
+    completedCount,
     currentStage,
     completeDreamMemory,
     completeLullaby,

@@ -12,6 +12,7 @@ export default function StatusBar({
   onWindowTabClick,
   onStartAppOpen,
   onOpenEasterEgg,
+  viewportInfo,
 }) {
   const [currentTime, setCurrentTime] = React.useState('23:47');
   const [startMenuOpen, setStartMenuOpen] = React.useState(false);
@@ -147,18 +148,21 @@ export default function StatusBar({
       </div>
 
       <div className="taskbar-right">
-        <div className="taskbar-tray-item font-mono hidden-mobile" title="Early Web Souvenir">
+        <div className="taskbar-tray-item font-mono tray-visitor-counter" title="Early Web Souvenir #0042">
           <span>VISITOR #0042</span>
         </div>
-        <div className="taskbar-tray-item font-mono hidden-mobile" title="Best Viewed at 800x600">
-          <span>800x600</span>
+        <div
+          className="taskbar-tray-item font-mono tray-resolution-item"
+          title={viewportInfo ? `${viewportInfo.resolutionTitle} (${viewportInfo.width}x${viewportInfo.height})` : 'Best Viewed at 800x600'}
+        >
+          <span className="res-badge-text">{viewportInfo?.chaosTag || '800x600'}</span>
         </div>
-        <div className="taskbar-tray-item font-mono hidden-mobile" title="Last Dream Patch: 10/19/1998">
+        <div className="taskbar-tray-item font-mono tray-patch-item" title="Last Dream Patch: 10/19/1998">
           <span>PATCH 10/19/98</span>
         </div>
 
-        <ThemeToggle />
-        <SoundToggle />
+        <ThemeToggle className="taskbar-theme-toggle" />
+        <SoundToggle className="taskbar-sound-toggle" />
 
         <div className="taskbar-tray-item font-mono" title="Connected to Moonbeam Relay v2">
           <Wifi size={13} color="var(--pip-green)" />
