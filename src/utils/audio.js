@@ -124,3 +124,22 @@ export function playSecretMelody() {
     }, i * 120);
   });
 }
+
+// Gentle bedtime completion motif for 01:03 Dream Delivery
+export function playDeliveryCompletionMotif() {
+  if (isAudioMuted) return;
+  // Nursery lullaby notes: E5 -> G5 -> A5 -> G5 -> E5 -> C5
+  const motif = [
+    { freq: 659.25, time: 0, dur: 0.6 },    // E5
+    { freq: 783.99, time: 200, dur: 0.6 },  // G5
+    { freq: 880.00, time: 420, dur: 0.7 },  // A5
+    { freq: 783.99, time: 660, dur: 0.7 },  // G5
+    { freq: 659.25, time: 900, dur: 0.8 },  // E5
+    { freq: 523.25, time: 1180, dur: 1.2 }, // C5
+  ];
+  motif.forEach(({ freq, time, dur }) => {
+    setTimeout(() => {
+      playMusicBoxNote(freq, dur);
+    }, time);
+  });
+}

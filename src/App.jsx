@@ -14,6 +14,10 @@ import WindowPanel from './components/WindowPanel';
 import DreamMemory from './components/DreamMemory';
 import Dreambook from './components/Dreambook';
 import SparkleTrail from './components/SparkleTrail';
+import DreamDeliveryModal from './components/DreamDeliveryModal';
+import AboutPip from './components/AboutPip';
+import SystemLog from './components/SystemLog';
+import SourceText from './components/SourceText';
 import { projectsData } from './data/projectsData';
 import { appsData } from './data/appsData';
 import { useWindowManager } from './hooks/useWindowManager';
@@ -43,6 +47,12 @@ export default function App() {
   // Initialize Dream Mission State Hook
   const missionState = useDreamMission();
 
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.__pipMission = missionState;
+    }
+  }, [missionState]);
+
   // Initialize Window Manager hook for Phase 1 Desktop OS
   const {
     openWindowIds,
@@ -55,11 +65,52 @@ export default function App() {
     focusWindow,
   } = useWindowManager(['hero']);
 
+  // 01:03 Dream Delivery Final Sequence State
+  const [deliveryModalOpen, setDeliveryModalOpen] = useState(false);
+  const deliveryTriggeredRef = React.useRef(false);
+
+  // Trigger 01:03 Dream Delivery sequence when all 4 mission tasks are completed
+  React.useEffect(() => {
+    const isReadyForDelivery =
+      missionState.dreamMemoryComplete &&
+      missionState.lullabyComplete &&
+      missionState.routeComplete &&
+      missionState.nightlightComplete;
+
+    if (isReadyForDelivery && !missionState.dreamDelivered && !deliveryTriggeredRef.current) {
+      deliveryTriggeredRef.current = true;
+      setNotificationOpen(false);
+      missionState.deliverDream();
+      setDeliveryModalOpen(true);
+    }
+  }, [
+    missionState.dreamMemoryComplete,
+    missionState.lullabyComplete,
+    missionState.routeComplete,
+    missionState.nightlightComplete,
+    missionState.dreamDelivered,
+    missionState,
+  ]);
+
+  // Global ALT + S keyboard shortcut to open SOURCE.TXT
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.altKey && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+        openWindow('source-txt');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [openWindow]);
+
   // Trigger system notification 800ms after boot finishes
   const handleBootComplete = () => {
     setHasBooted(true);
     setTimeout(() => {
-      setNotificationOpen(true);
+      if (!missionState.dreamDelivered) {
+        setNotificationOpen(true);
+      }
     }, 800);
   };
 
@@ -168,6 +219,12 @@ export default function App() {
             isMissionActive={!missionState.dreamDelivered}
           />
         );
+      case 'about-pip':
+        return <AboutPip isSleeping={missionState.dreamDelivered} />;
+      case 'system-log':
+        return <SystemLog missionState={missionState} />;
+      case 'source-txt':
+        return <SourceText />;
       default:
         return <div>App content loading...</div>;
     }
@@ -181,7 +238,7 @@ export default function App() {
       )}
 
       {/* Main 90s Operating System Desktop */}
-      <div className="pip-desktop-environment">
+      <div className={`pip-desktop-environment ${missionState.dreamDelivered ? 'is-dream-delivered' : ''}`}>
         {/* Floating Decorative Nursery Stars & Drifting Moonbeam */}
         <div className="nursery-stars-layer" aria-hidden="true">
           <span className="star-twinkle s1">✦</span>
@@ -335,7 +392,7 @@ export default function App() {
 
         {/* System Message Notification Dialog */}
         <SystemNotification
-          isOpen={notificationOpen}
+          isOpen={notificationOpen && !missionState.dreamDelivered}
           onClose={() => setNotificationOpen(false)}
           onHelpPip={() => {
             openWindow('dream-memory');
@@ -347,6 +404,12 @@ export default function App() {
         <EasterEgg
           isOpen={easterEggOpen}
           onClose={() => setEasterEggOpen(false)}
+        />
+
+        {/* 01:03 Dream Delivery Sequence & Ending Window */}
+        <DreamDeliveryModal
+          isOpen={deliveryModalOpen}
+          onClose={() => setDeliveryModalOpen(false)}
         />
       </div>
     </div>

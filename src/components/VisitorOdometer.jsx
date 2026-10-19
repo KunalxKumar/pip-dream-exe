@@ -55,7 +55,7 @@ export default function VisitorOdometer({
     return (
       <div
         className={`pip-odometer-start-card font-mono ${className}`}
-        title={`Assigned Session ID: ${visitorId || 'PIP-0042'}`}
+        title={`Local Session ID: ${visitorId || 'PIP-0042'} • 1998 Personal Web Artifact`}
       >
         <div className="odometer-header-row font-pixel">
           <span className="odometer-title">YOU ARE VISITOR</span>
@@ -64,7 +64,7 @@ export default function VisitorOdometer({
             COUNTER ONLINE
           </span>
         </div>
-        <div className="pip-odometer-display-box" aria-label={`Visitor count ${formattedNumber}`}>
+        <div className="pip-odometer-display-box" aria-label={`Local visitor count ${formattedNumber}`}>
           <span className="pip-odometer-hash">#</span>
           <div className="pip-odometer-digits-cluster">
             {currentDigits.map((digit, idx) => (
@@ -86,8 +86,8 @@ export default function VisitorOdometer({
   return (
     <div
       className={`pip-odometer-tray-container ${className}`}
-      title={`YOU ARE VISITOR #${formattedNumber} • COUNTER ONLINE`}
-      aria-label={`Visitor number ${formattedNumber}`}
+      title={`YOU ARE VISITOR #${formattedNumber} • Local 1998 Hit Counter Online`}
+      aria-label={`Local visitor number ${formattedNumber}`}
     >
       <span className="pip-odometer-label font-mono">VISITOR</span>
       <div className="pip-odometer-display-box">

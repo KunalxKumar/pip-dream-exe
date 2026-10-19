@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Sparkles, Clock, Wifi, Folder, Music, Compass, Moon, Gamepad2, Star, BookOpen } from 'lucide-react';
+import { Heart, Sparkles, Clock, Wifi, Folder, Music, Compass, Moon, Gamepad2, Star, BookOpen, FileText, Code, Info } from 'lucide-react';
 import SoundToggle from './SoundToggle';
 import ThemeToggle from './ThemeToggle';
 import StarTrailToggle from './StarTrailToggle';
@@ -59,6 +59,9 @@ export default function StatusBar({
       case 'nightlights': return <Moon size={12} />;
       case 'dream-log': return <Sparkles size={12} />;
       case 'dreambook': return <BookOpen size={12} />;
+      case 'about-pip': return <Info size={12} />;
+      case 'system-log': return <FileText size={12} />;
+      case 'source-txt': return <Code size={12} />;
       case 'secret': return <Star size={12} />;
       default: return <Sparkles size={12} />;
     }

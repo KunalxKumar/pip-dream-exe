@@ -4195,5 +4195,508 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   background: rgba(252, 231, 162, 0.2);
 }
 
+/* ============================================================
+   STEP 5 — 01:03 DREAM DELIVERY FINAL SEQUENCE & ENDING WINDOW
+   ============================================================ */
+.dream-delivery-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 9, 15, 0.82);
+  backdrop-filter: blur(5px);
+  z-index: 1000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: deliveryFadeIn 0.4s ease-out;
+}
+
+@keyframes deliveryFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dream-delivery-window {
+  width: 100%;
+  max-width: 460px;
+  background: #0d121c;
+  border: 2.5px solid var(--pip-yellow, #FCE7A2);
+  box-shadow: 0 0 30px rgba(252, 231, 162, 0.35), 8px 8px 0 rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dream-delivery-titlebar {
+  background: linear-gradient(90deg, #182030, #252e46);
+  color: var(--pip-yellow, #FCE7A2);
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--pip-yellow, #FCE7A2);
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.window-time-badge {
+  background: rgba(252, 231, 162, 0.15);
+  border: 1px solid var(--pip-yellow, #FCE7A2);
+  padding: 1px 6px;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+
+.dream-delivery-body {
+  padding: 24px 20px;
+  color: #FFFDF7;
+  text-align: center;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cinematic Delivery Sequence */
+.delivery-cinematic-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.stage-star-icon {
+  font-size: 1.25rem;
+  color: var(--pip-yellow, #FCE7A2);
+  letter-spacing: 6px;
+  animation: stagePulse 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes stagePulse {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  100% { transform: scale(1.08); opacity: 1; }
+}
+
+.stage-progress-bar {
+  width: 220px;
+  max-width: 80%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(252, 231, 162, 0.3);
+}
+
+.stage-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pip-yellow, #FCE7A2), var(--pip-pink, #F7D6E0), #7AE582);
+  transition: width 0.3s ease;
+}
+
+.stage-text-display {
+  font-size: 0.95rem;
+  color: #FFFDF7;
+  white-space: pre-line;
+  line-height: 1.6;
+  margin: 4px 0 8px;
+  letter-spacing: 0.5px;
+}
+
+.stage-subtle-hint {
+  font-size: 0.65rem;
+  color: #B5A6C9;
+  opacity: 0.8;
+}
+
+/* Ending Window Card */
+.delivery-ending-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  animation: endingCardReveal 0.6s ease-out;
+}
+
+@keyframes endingCardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ending-star-cluster {
+  font-size: 1.3rem;
+  color: var(--pip-yellow, #FCE7A2);
+  letter-spacing: 8px;
+  margin-bottom: 2px;
+}
+
+.ending-clock-display {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--pip-yellow, #FCE7A2);
+  letter-spacing: 2px;
+  text-shadow: 0 0 16px rgba(252, 231, 162, 0.5);
+  line-height: 1;
+}
+
+.ending-nursery-title {
+  font-size: 0.85rem;
+  color: #E8D7F1;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+}
+
+.ending-narrative {
+  font-size: 1.05rem;
+  color: #FFFDF7;
+  font-style: italic;
+  margin: 6px 0;
+}
+
+.ending-signoff {
+  font-size: 1.15rem;
+  color: var(--pip-pink, #F7D6E0);
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.return-pipos-btn {
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+/* Delivered Desktop Mood */
+.pip-desktop-environment.is-dream-delivered {
+  transition: background 1.5s ease;
+}
+
+.is-dream-delivered .pip-taskbar {
+  background: rgba(16, 20, 30, 0.95);
+  border-top-color: rgba(252, 231, 162, 0.25);
+}
+
+.is-dream-delivered::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 30%, rgba(252, 231, 162, 0.04), transparent 75%);
+  z-index: 1;
+}
+
+/* ============================================================
+   STEP 6 — PIPOS EARLY-WEB LORE APPLICATIONS STYLES
+   ============================================================ */
+.lore-app-container {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  color: var(--text-main);
+}
+
+.lore-top-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.62rem;
+}
+
+.lore-badge {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-retro, rgba(255, 255, 255, 0.15));
+  padding: 2px 6px;
+  border-radius: 2px;
+  color: var(--pip-yellow, #FCE7A2);
+  white-space: nowrap;
+}
+
+/* ABOUT_PIP.EXE */
+.about-pip-card {
+  background: rgba(16, 20, 28, 0.65);
+  border: 1.5px solid var(--border-retro, #fff);
+  border-radius: 4px;
+  padding: 14px;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.6);
+}
+
+.about-pip-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+  padding-bottom: 10px;
+}
+
+.about-avatar {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.about-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.about-name {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--pip-yellow, #FCE7A2);
+}
+
+.about-subtitle {
+  font-size: 0.68rem;
+  opacity: 0.85;
+  color: var(--text-main);
+}
+
+.about-pip-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+
+.about-field-row {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.field-label {
+  color: var(--pip-pink, #F7D6E0);
+  font-weight: bold;
+  width: 140px;
+  flex-shrink: 0;
+  font-size: 0.78rem;
+}
+
+.field-value {
+  color: #FFFDF7;
+  flex: 1;
+}
+
+.field-value.status-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+
+.field-value.status-tag.is-sleeping {
+  color: #7AE582;
+  background: rgba(122, 229, 130, 0.15);
+  border: 1px solid #7AE582;
+}
+
+.field-value.status-tag.is-awake {
+  color: var(--pip-yellow, #FCE7A2);
+  background: rgba(252, 231, 162, 0.15);
+  border: 1px solid var(--pip-yellow, #FCE7A2);
+}
+
+.specialties-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.about-footer-quote {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  font-size: 0.72rem;
+  color: #B5A6C9;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* SYSTEM.LOG */
+.system-log-terminal {
+  background: #080b10;
+  border: 2px solid var(--border-retro, #fff);
+  border-radius: 4px;
+  padding: 12px;
+  box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: var(--pip-yellow, #FCE7A2);
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 6px;
+}
+
+.live-blink-dot {
+  color: #7AE582;
+  font-size: 0.65rem;
+}
+
+.log-table-header {
+  display: flex;
+  font-size: 0.72rem;
+  font-weight: bold;
+  color: #8F9BB3;
+  padding: 2px 0 4px;
+}
+
+.log-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 4px;
+}
+
+.col-time {
+  width: 55px;
+  flex-shrink: 0;
+}
+
+.col-event {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.col-status {
+  width: 75px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.log-entry-row {
+  display: flex;
+  font-size: 0.76rem;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.log-entry-row.is-complete {
+  color: #E8D7F1;
+}
+
+.log-entry-row.is-pending {
+  color: #6C7A9C;
+  opacity: 0.7;
+}
+
+.status-ok {
+  color: #7AE582;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #E8A598;
+}
+
+.terminal-footer {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.68rem;
+}
+
+.footer-complete-text {
+  color: #7AE582;
+  font-weight: bold;
+}
+
+.footer-pending-text {
+  color: var(--pip-yellow, #FCE7A2);
+}
+
+/* SOURCE.TXT */
+.source-paper-frame {
+  background: #0d121c;
+  border: 1.5px solid var(--border-retro, #fff);
+  border-radius: 4px;
+  padding: 14px;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.6);
+}
+
+.source-paper-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: var(--pip-yellow, #FCE7A2);
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 6px;
+}
+
+.shortcut-badge {
+  background: rgba(252, 231, 162, 0.15);
+  border: 1px solid var(--pip-yellow, #FCE7A2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 0.62rem;
+}
+
+.source-text-block {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #FFFDF7;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 12px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.source-paper-footer {
+  margin-top: 10px;
+  font-size: 0.65rem;
+  color: #B5A6C9;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+  .dream-delivery-window {
+    max-width: 95%;
+  }
+
+  .ending-clock-display {
+    font-size: 2rem;
+  }
+
+  .field-label {
+    width: 100%;
+  }
+
+  .col-event {
+    font-size: 0.68rem;
+  }
+}
+
 
 
