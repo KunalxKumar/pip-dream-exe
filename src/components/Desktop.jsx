@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { playClickSound } from '../utils/audio';
+import { appsData } from '../data/appsData';
 
 export default function Desktop({
   activeId = 'hero',
@@ -8,37 +9,56 @@ export default function Desktop({
   onItemHover,
   onItemLeave,
 }) {
-  const desktopIcons = [
-    { id: 'hero', emoji: '👶', label: 'PIP', desc: 'Meet Pip', gazeTarget: 'sidebar' },
-    { id: 'projects', emoji: '📁', label: 'PROJECTS', desc: '3 Inventions', gazeTarget: 'sidebar' },
-    { id: 'story', emoji: '🌙', label: 'DREAM LOG', desc: 'Origin Chronicle', gazeTarget: 'sidebar' },
-    { id: 'lullaby-lab', emoji: '🎵', label: 'LULLABY', desc: '432 Hz Synthesizer', gazeTarget: 'sidebar' },
-    { id: 'nightlight-lab', emoji: '🏮', label: 'LIGHTS', desc: 'Lantern Daemon', gazeTarget: 'sidebar' },
-    { id: 'dream-route', emoji: '🗺️', label: 'ROUTES', desc: 'Cloud Delivery', gazeTarget: 'sidebar' },
-  ];
+  const [selectedId, setSelectedId] = useState(activeId);
+
+  const desktopIcons = appsData.filter((app) => app.id !== 'secret');
+
+  const handleIconClick = (appId) => {
+    playClickSound();
+    setSelectedId(appId);
+    if (onIconClick) {
+      onIconClick(appId, 'select');
+    }
+  };
+
+  const handleIconDoubleClick = (appId) => {
+    playClickSound();
+    setSelectedId(appId);
+    if (onIconClick) {
+      onIconClick(appId, 'open');
+    }
+  };
+
+  const handleKeyDown = (e, appId) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleIconDoubleClick(appId);
+    }
+  };
 
   return (
     <aside className="pip-desktop-icons" aria-label="Desktop icons">
       {desktopIcons.map((item) => {
+        const isSelected = selectedId === item.id;
         const isActive = activeId === item.id;
+
         return (
           <button
             key={item.id}
             type="button"
-            className={`desktop-icon-btn ${isActive ? 'is-active' : ''}`}
-            onClick={() => {
-              playClickSound();
-              if (onIconClick) onIconClick(item.id);
-            }}
+            className={`desktop-icon-btn ${isSelected ? 'is-selected' : ''} ${isActive ? 'is-active' : ''}`}
+            onClick={() => handleIconClick(item.id)}
+            onDoubleClick={() => handleIconDoubleClick(item.id)}
+            onKeyDown={(e) => handleKeyDown(e, item.id)}
             onMouseEnter={() => {
-              if (onItemHover) onItemHover(item.gazeTarget);
+              if (onItemHover) onItemHover('sidebar');
             }}
             onMouseLeave={() => {
               if (onItemLeave) onItemLeave();
             }}
-            aria-label={`Open ${item.label}: ${item.desc}`}
+            aria-label={`Open ${item.shortLabel}: ${item.desc}`}
             aria-current={isActive ? 'page' : undefined}
-            title={`${item.label} — ${item.desc}`}
+            title={`${item.title} — Double-click or Enter to open`}
           >
             <div className="icon-graphic">
               <span className="icon-emoji" role="img" aria-hidden="true">
@@ -46,7 +66,7 @@ export default function Desktop({
               </span>
               <span className="icon-sparkle-hover" aria-hidden="true">✦</span>
             </div>
-            <span className="font-pixel icon-label">{item.label}</span>
+            <span className="font-pixel icon-label">{item.shortLabel}</span>
           </button>
         );
       })}
@@ -65,7 +85,7 @@ export default function Desktop({
         onMouseLeave={() => {
           if (onItemLeave) onItemLeave();
         }}
-        title="Pip's Star Charm"
+        title="Pip's Star Charm — Secret Easter Egg"
         aria-label="Pip's Star Charm"
       >
         <div className="icon-graphic moon-glow">
@@ -74,7 +94,7 @@ export default function Desktop({
           </span>
           <span className="icon-sparkle-hover" aria-hidden="true">✨</span>
         </div>
-        <span className="font-pixel icon-label">★</span>
+        <span className="font-pixel icon-label">SECRET</span>
       </button>
     </aside>
   );
