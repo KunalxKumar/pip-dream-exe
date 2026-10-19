@@ -24,6 +24,7 @@ export default function WindowPanel({
       {/* 90s Retro Window Header */}
       <div className="pip-window-header">
         <div className="pip-window-title">
+          <span className="pip-title-grip" aria-hidden="true">≡ ≡ ≡</span>
           {icon && <span className="window-icon">{icon}</span>}
           <span>{title}</span>
         </div>
@@ -37,7 +38,7 @@ export default function WindowPanel({
               aria-label="Minimize window"
               title="Minimize"
             >
-              <Minus size={10} />
+              <Minus size={10} strokeWidth={3} />
             </button>
           )}
           {onMaximize && (
@@ -48,7 +49,7 @@ export default function WindowPanel({
               aria-label="Maximize window"
               title="Maximize"
             >
-              <Square size={9} />
+              <Square size={9} strokeWidth={3} />
             </button>
           )}
           {onClose && (
@@ -59,7 +60,7 @@ export default function WindowPanel({
               aria-label="Close window"
               title="Close"
             >
-              <X size={10} />
+              <X size={10} strokeWidth={3} />
             </button>
           )}
         </div>
@@ -69,11 +70,18 @@ export default function WindowPanel({
       {!isMinimized && (
         <>
           <div className="pip-window-body">{children}</div>
-          {statusText && (
-            <div className="pip-status-bar">
+          {statusText ? (
+            <div className="pip-status-bar font-pixel">
               <span className="pip-status-field">{statusText}</span>
-              <span className="font-pixel pip-status-system-tag">
-                PipOS 1998
+              <span className="pip-status-system-tag">
+                SYS_READY | 432Hz | MEM: 64KB
+              </span>
+            </div>
+          ) : (
+            <div className="pip-status-bar font-pixel">
+              <span className="pip-status-field">SYS_READY</span>
+              <span className="pip-status-system-tag">
+                SYS_READY | 432Hz | MEM: 64KB
               </span>
             </div>
           )}

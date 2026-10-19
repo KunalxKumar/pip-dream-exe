@@ -1,30 +1,33 @@
-# CLAUDE.md — PipOS Director Directives for Claude Code
+# CLAUDE.md — PipOS Frontend Design Polish Pass
 
 ## Project Objective
 Transform this React + Vite portfolio into **"Pip's tiny magical computer from 1998"** (PipOS).
 You are performing the heavy lifting under the direction of Antigravity.
 
-## Current Progress & Architecture
-- **Step 1 (Phase 0)**: Design tokens & colors locked in `src/index.css` (Day & Night Moonlit Nursery palettes).
-- **Step 2 (Phase 1 & 3)**: Desktop shell & sticky sidebar dock overhauled (`src/components/Desktop.jsx`, `src/App.jsx`).
-- **Step 3 (Phase 2)**: Hero window balanced, Dream Queue native status panel built, and WCAG AA contrast fixed (`src/components/Pip.jsx`).
-- **Step 4 (Phase 4)**: Interactive mini-app previews in `src/components/ProjectCard.jsx` and `src/index.css`.
-- **Step 5 (Phase 5)**: System Notification Window polished into authentic 1998 alert dialog with dual actions (`[ HELP PIP ]` and `[ LATER ]`).
-- **Git State**: Clean commit `8bfee87`.
+---
+
+## YOUR CURRENT TASK: Frontend Design Polish (Phase 7 - 1998 OS Ergonomics)
+
+Execute the 3 targeted aesthetic improvements:
+
+### 1. Authentic 1998 Window Frames (`src/components/WindowPanel.jsx` & `src/index.css`)
+- Add classic 1998 title bar horizontal grip stripes (`≡ ≡ ≡`) behind the window title.
+- Give title bar control buttons (`_`, `□`, `X`) authentic retro beveled borders with active depression.
+- Add an inset status bar at the bottom of the window (`SYS_READY | 432Hz | MEM: 64KB`) with subtle engraved borders.
+
+### 2. Mobile Notification Tray (`src/components/SystemNotification.jsx` & `src/index.css`)
+- On screens under 600px, replace the screen-covering floating modal with a docked system tray notification:
+  - Dock it right above the taskbar (`bottom: 48px; left: 8px; right: 8px`).
+  - Keep it compact so it never blocks desktop icon interaction or window contents.
+
+### 3. Tactile 1998 Controls & Micro-Interactions (`src/index.css`)
+- Apply mechanical depression (`transform: translate(1px, 1px)`) and classic beveled shadow shifts on all button `:active` states.
+- Ensure all long-form narrative text uses crisp, high-contrast readable type rather than hard-to-read pixel font.
+- Maintain high WCAG AA contrast for both Day (`#FFF8F1`, `#A34063`) and Night (`#130F1E`, `#FFF5E4`, `#E8C978`) modes.
 
 ---
 
-## YOUR CURRENT TASK: STEP 6 — Origin Story & Bedtime Laboratory Polish (Phase 6)
+## Verification
+- Run `npm run build` and `npx oxlint src` — must pass with 0 errors.
 
-Polish the remaining two major sections:
-1. **Pip's Origin Chronicle (`src/components/StoryScene.jsx`)**:
-   - Ensure the timeline log feels like cozy retro log telemetry (`TIMESTAMP: 23:47 → 01:03`).
-   - Enhance the scene navigator controls (`< PREV`, `NEXT >`, `[ AUTO-PLAY ]`).
-   - Polish Scene 6's "Section 15 WOW MOMENT" sequence (signal locked, delivery routing, zero dream loss guarantee).
-2. **Bedtime Workbenches (`src/components/Workbench.jsx` and sub-labs)**:
-   - Ensure the tab switching (`LULLABY SYNTH`, `ROUTE MAP`, `NIGHTLIGHTS`) has authentic 1998 tab styling.
-   - Verify WCAG AA contrast across all laboratory controls and meters.
-3. **Verification**:
-   - Run `npm run build` and `npx oxlint src` — must finish with 0 errors.
-
-Execute this task now.
+Execute this pass now.
