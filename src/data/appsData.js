@@ -77,6 +77,17 @@ export const appsData = [
     y: 0,
   },
   {
+    id: 'dreambook',
+    title: 'DREAMBOOK.TXT',
+    shortLabel: 'DREAMBOOK',
+    emoji: '📖',
+    desc: 'Leave a little dream for Pip',
+    width: 660,
+    height: 500,
+    x: 0,
+    y: 0,
+  },
+  {
     id: 'secret',
     title: 'SECRET EASTER EGG',
     shortLabel: 'SECRET',

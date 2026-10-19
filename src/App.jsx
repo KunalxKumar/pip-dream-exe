@@ -12,6 +12,7 @@ import StatusBar from './components/StatusBar';
 import SystemNotification from './components/SystemNotification';
 import WindowPanel from './components/WindowPanel';
 import DreamMemory from './components/DreamMemory';
+import Dreambook from './components/Dreambook';
 import { projectsData } from './data/projectsData';
 import { appsData } from './data/appsData';
 import { useWindowManager } from './hooks/useWindowManager';
@@ -151,6 +152,12 @@ export default function App() {
             </div>
             <StoryScene />
           </div>
+        );
+      case 'dreambook':
+        return (
+          <Dreambook
+            isMissionActive={!missionState.dreamDelivered}
+          />
         );
       default:
         return <div>App content loading...</div>;

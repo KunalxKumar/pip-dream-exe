@@ -3542,3 +3542,327 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   letter-spacing: 1px;
 }
 
+/* ============================================================
+   PIPOS DREAMBOOK (DREAMBOOK.TXT) 1998 GUESTBOOK ENGINE
+   ============================================================ */
+.dreambook-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dreambook-meta-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: var(--pip-cream);
+  border: 1.5px solid var(--pip-brown);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  color: var(--pip-brown);
+}
+
+.dreambook-meta-banner .meta-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dreambook-meta-banner .meta-dot {
+  color: var(--pip-brown-light);
+}
+
+.dreambook-storage-pill {
+  background: var(--window-bg);
+  border: 1px solid var(--pip-brown);
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-size: 0.65rem;
+  color: var(--pip-berry);
+}
+
+.dreambook-reaction-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFF8F1;
+  border: 1.5px solid var(--pip-berry);
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  color: var(--pip-berry);
+  box-shadow: 2px 2px 0px var(--pip-brown);
+}
+
+.dreambook-error-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFF0F0;
+  border: 1.5px solid var(--pip-berry);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  color: var(--pip-berry);
+}
+
+.dreambook-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--window-bg);
+  border: 2px solid var(--pip-brown);
+  border-radius: 8px;
+  padding: 14px;
+  box-shadow: 2px 2px 0px var(--pip-brown);
+}
+
+.dreambook-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-label {
+  font-size: 0.78rem;
+  font-weight: bold;
+  color: var(--pip-brown);
+  letter-spacing: 0.5px;
+}
+
+.char-count {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.dreambook-input {
+  padding: 8px 10px;
+  border: 1.5px solid var(--pip-brown);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  background: var(--pip-cream);
+  color: var(--text-main);
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dreambook-input:focus,
+.dreambook-textarea:focus {
+  border-color: var(--pip-berry);
+  box-shadow: 0 0 0 2px var(--pip-pink);
+}
+
+.dreambook-textarea {
+  padding: 8px 10px;
+  border: 1.5px solid var(--pip-brown);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  background: var(--pip-cream);
+  color: var(--text-main);
+  outline: none;
+  resize: vertical;
+  min-height: 64px;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.4;
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dreambook-submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.dreambook-sign-btn {
+  padding: 8px 18px;
+  font-size: 0.8rem;
+  min-height: 44px;
+}
+
+.form-hint {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* Recent Dreamers Entries */
+.dreambook-entries-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.entries-heading-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--pip-berry);
+  font-weight: bold;
+}
+
+.dreambook-entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dreambook-entry-card {
+  background: var(--pip-cream);
+  border: 1.5px solid var(--pip-brown);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 1px 1px 0px var(--pip-brown);
+}
+
+.entry-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  border-bottom: 1px dashed var(--pip-brown-light);
+  padding-bottom: 4px;
+}
+
+.entry-author {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+  color: var(--pip-berry);
+}
+
+.entry-star {
+  color: var(--pip-yellow);
+  text-shadow: 0 0 1px var(--pip-brown);
+}
+
+.entry-meta {
+  display: flex;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+}
+
+.entry-message {
+  font-size: 0.88rem;
+  color: var(--text-main);
+  line-height: 1.4;
+  font-style: italic;
+  margin: 0;
+  word-break: break-word;
+}
+
+.dreambook-pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 4px 0;
+}
+
+.pager-btn {
+  padding: 6px 10px;
+  font-size: 0.68rem;
+  min-height: 38px;
+  white-space: nowrap;
+}
+
+.pager-status {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Midnight Theme Adjustments for Dreambook */
+[data-theme="midnight"] .dreambook-meta-banner {
+  background: #211A2D;
+  border-color: #5A4373;
+  color: #F8EBDD;
+}
+
+[data-theme="midnight"] .dreambook-storage-pill {
+  background: #171123;
+  border-color: #5A4373;
+  color: #FCE7A2;
+}
+
+[data-theme="midnight"] .dreambook-reaction-bar {
+  background: #2E2038;
+  border-color: var(--pip-yellow);
+  color: #FCE7A2;
+  box-shadow: 2px 2px 0px #0D0914;
+}
+
+[data-theme="midnight"] .dreambook-form {
+  background: #171123;
+  border-color: #523E72;
+  box-shadow: 2px 2px 0px #0D0914;
+}
+
+[data-theme="midnight"] .form-label {
+  color: #FCE7A2;
+}
+
+[data-theme="midnight"] .dreambook-input,
+[data-theme="midnight"] .dreambook-textarea {
+  background: #211A2D;
+  border-color: #5A4373;
+  color: #FFF8F1;
+}
+
+[data-theme="midnight"] .dreambook-input:focus,
+[data-theme="midnight"] .dreambook-textarea:focus {
+  border-color: var(--pip-yellow);
+  box-shadow: 0 0 0 2px rgba(252, 231, 162, 0.3);
+}
+
+[data-theme="midnight"] .entries-heading-bar {
+  color: #FCE7A2;
+}
+
+[data-theme="midnight"] .dreambook-entry-card {
+  background: #211A2D;
+  border-color: #5A4373;
+  box-shadow: 1px 1px 0px #0F0B18;
+}
+
+[data-theme="midnight"] .entry-card-header {
+  border-bottom-color: #3D2D52;
+}
+
+[data-theme="midnight"] .entry-author {
+  color: var(--pip-yellow);
+}
+
+[data-theme="midnight"] .entry-message {
+  color: #F8EBDD;
+}
+
+[data-theme="midnight"] .entry-meta {
+  color: #B5A6C9;
+}
+
+
