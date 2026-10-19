@@ -52,6 +52,9 @@ export default function App() {
   const handleDesktopIconAction = (appId, action) => {
     if (action === 'open') {
       openWindow(appId);
+      if (appId === 'dream-memory') {
+        setNotificationOpen(false);
+      }
     } else {
       if (openWindowIds.includes(appId)) {
         focusWindow(appId);
@@ -224,7 +227,10 @@ export default function App() {
         <SystemNotification
           isOpen={notificationOpen}
           onClose={() => setNotificationOpen(false)}
-          onHelpPip={() => openWindow('dream-memory')}
+          onHelpPip={() => {
+            openWindow('dream-memory');
+            setNotificationOpen(false);
+          }}
         />
 
         {/* Easter Egg Modal */}

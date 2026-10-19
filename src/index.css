@@ -133,6 +133,9 @@ h1, h2, h3, h4 {
   border-radius: var(--radius-window);
   box-shadow: var(--shadow-window);
   overflow: hidden;
+  box-sizing: border-box;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -180,22 +183,29 @@ h1, h2, h3, h4 {
 }
 
 .pip-window-btn {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border: 1.5px solid var(--pip-brown);
   border-radius: 4px;
   background: var(--pip-cream);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: 10px;
   font-family: var(--font-mono);
   font-weight: bold;
   color: var(--pip-brown);
   cursor: pointer;
-  box-shadow: 1px 1px 0px var(--pip-brown);
-  transition: transform 0.05s ease, background-color 0.1s ease;
+  box-shadow: 1.5px 1.5px 0px var(--pip-brown);
+  transition: transform 0.05s ease, background-color 0.1s ease, border-color 0.1s ease;
   position: relative;
+}
+
+[data-theme="midnight"] .pip-window-btn {
+  background: #3B2C4E;
+  border-color: #E8C978;
+  color: #FFFDF7;
+  box-shadow: 1.5px 1.5px 0px #0F0B18;
 }
 
 /* Touch hit-area expansion for mobile */
@@ -211,6 +221,12 @@ h1, h2, h3, h4 {
   background: var(--pip-yellow);
 }
 
+[data-theme="midnight"] .pip-window-btn:hover {
+  background: #E8C978;
+  color: #171426;
+  border-color: #FFFDF7;
+}
+
 .pip-window-btn:active {
   transform: translate(1px, 1px) !important;
   box-shadow: 0px 0px 0px var(--pip-brown) !important;
@@ -219,6 +235,18 @@ h1, h2, h3, h4 {
 .pip-window-btn.close:hover {
   background: var(--pip-berry);
   color: white;
+}
+
+[data-theme="midnight"] .pip-window-btn.close {
+  background: #4A273D;
+  border-color: #F7A8B8;
+  color: #FFFDF7;
+}
+
+[data-theme="midnight"] .pip-window-btn.close:hover {
+  background: var(--pip-berry);
+  color: #FFFFFF;
+  border-color: #FFFFFF;
 }
 
 .pip-window-body {
@@ -2905,6 +2933,176 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     right: 12px;
     bottom: 56px;
     width: auto;
+  }
+}
+
+/* ============================================================
+   PIPOS DREAM MEMORY (DREAM.MEMORY.EXE) RESPONSIVE ENGINE
+   ============================================================ */
+.dream-memory-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Clean 2-Row Header (Title on Top, Instruction & Stability Below) */
+.dream-memory-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--pip-cream);
+  border: 2px solid var(--pip-brown);
+  border-radius: var(--radius-btn);
+  padding: 8px 12px;
+  box-shadow: 2px 2px 0px var(--pip-brown);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dream-memory-title {
+  font-size: 0.76rem;
+  color: var(--pip-brown);
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+[data-theme="midnight"] .dream-memory-title {
+  color: #FCE7A2;
+}
+
+.dream-memory-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--pip-berry);
+}
+
+[data-theme="midnight"] .dream-memory-meta {
+  color: #F7D6E0;
+}
+
+.dream-memory-stability {
+  background: var(--window-bg);
+  border: 1px solid var(--pip-brown);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+[data-theme="midnight"] .dream-memory-stability {
+  border-color: #5A4373;
+}
+
+/* Card Grid: Desktop 4 Columns × 2 Rows */
+.dream-memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.dream-memory-card {
+  width: 100%;
+  min-width: 0;
+  height: 72px;
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dream-memory-card .card-symbol {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.dream-memory-card .card-name {
+  font-size: 0.65rem;
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  line-height: 1;
+}
+
+.dream-memory-card .card-back-icon {
+  font-size: 1.25rem;
+  color: var(--pip-berry);
+  line-height: 1;
+}
+
+/* Footer & Status Alignment */
+.dream-memory-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.pairs-matched-text {
+  font-size: 1.08rem;
+  color: var(--text-muted);
+}
+
+.reset-board-btn {
+  padding: 4px 10px;
+  font-size: 0.7rem;
+}
+
+/* Mobile Responsive: 2 Columns × 4 Rows */
+@media (max-width: 600px) {
+  .dream-memory-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .dream-memory-card {
+    height: 58px;
+    padding: 2px 4px;
+  }
+
+  .dream-memory-card .card-symbol {
+    font-size: 1.3rem;
+  }
+
+  .dream-memory-card .card-name {
+    font-size: 0.6rem;
+  }
+
+  .dream-memory-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .pip-status-system-tag {
+    display: none;
+  }
+}
+
+/* Mobile Window Viewport Clamp */
+@media (max-width: 768px) {
+  .pip-window {
+    left: 16px !important;
+    top: 16px !important;
+    width: calc(100vw - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+    max-height: calc(100vh - 80px) !important;
   }
 }
 

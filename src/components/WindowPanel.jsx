@@ -57,8 +57,16 @@ export default function WindowPanel({
     const newX = e.clientX - dragOffsetRef.current.x;
     const newY = e.clientY - dragOffsetRef.current.y;
 
-    onPositionChange(appId, newX, newY);
-  }, [appId, onPositionChange]);
+    const margin = 16;
+    const taskbarHeight = 48;
+    const maxX = Math.max(margin, window.innerWidth - width - margin);
+    const maxY = Math.max(margin, window.innerHeight - taskbarHeight - 48);
+
+    const clampedX = Math.max(margin, Math.min(newX, maxX));
+    const clampedY = Math.max(margin, Math.min(newY, maxY));
+
+    onPositionChange(appId, clampedX, clampedY);
+  }, [appId, onPositionChange, width]);
 
   const handleMouseUp = useCallback(() => {
     isDraggingRef.current = false;
@@ -73,12 +81,27 @@ export default function WindowPanel({
     };
   }, [handleMouseMove, handleMouseUp]);
 
+  // Viewport clamping on render to prevent windows from rendering partially off-screen
+  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
+  const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 768;
+  const margin = 16;
+  const taskbarHeight = 48;
+
+  const maxAllowedX = Math.max(margin, viewportWidth - width - margin);
+  const safeX = Math.max(margin, Math.min(position.x, maxAllowedX));
+
+  const maxAllowedY = Math.max(margin, viewportHeight - taskbarHeight - 64);
+  const safeY = Math.max(margin, Math.min(position.y, maxAllowedY));
+
   const style = {
     position: 'absolute',
-    left: `${position.x}px`,
-    top: `${position.y}px`,
+    left: `${safeX}px`,
+    top: `${safeY}px`,
     width: `${width}px`,
-    maxWidth: 'calc(100vw - 160px)',
+    maxWidth: 'calc(100vw - 32px)',
+    maxHeight: 'calc(100vh - 80px)',
+    boxSizing: 'border-box',
+    overflow: 'hidden',
     zIndex: zIndex,
   };
 
@@ -107,23 +130,23 @@ export default function WindowPanel({
           {onMinimize && (
             <button
               type="button"
-              className="pip-window-btn"
+              className="pip-window-btn minimize"
               onClick={() => handleControlClick(onMinimize)}
               aria-label="Minimize window"
               title="Minimize"
             >
-              <Minus size={10} strokeWidth={3} />
+              <Minus size={11} strokeWidth={3} />
             </button>
           )}
           {onMaximize && (
             <button
               type="button"
-              className="pip-window-btn"
+              className="pip-window-btn maximize"
               onClick={() => handleControlClick(onMaximize)}
               aria-label="Maximize window"
               title="Maximize"
             >
-              <Square size={9} strokeWidth={3} />
+              <Square size={10} strokeWidth={3} />
             </button>
           )}
           {onClose && (
@@ -134,7 +157,7 @@ export default function WindowPanel({
               aria-label="Close window"
               title="Close"
             >
-              <X size={10} strokeWidth={3} />
+              <X size={11} strokeWidth={3} />
             </button>
           )}
         </div>
