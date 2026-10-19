@@ -23,7 +23,7 @@ export default function WindowPanel({
 }) {
   const windowRef = useRef(null);
   const isDraggingRef = useRef(false);
-  const dragOffsetRef = useRef({ x: 0, y: 0 });
+  const dragStartRef = useRef({ mouseX: 0, mouseY: 0, startX: 0, startY: 0 });
 
   const handleControlClick = (callback) => {
     playClickSound();
@@ -36,16 +36,17 @@ export default function WindowPanel({
     }
 
     // Disable dragging on mobile (<= 768px)
-    if (window.innerWidth <= 768) return;
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return;
 
-    // Only drag from title bar
-    if (e.target.closest('.pip-window-controls')) return;
+    // Only drag from title bar, not buttons
+    if (e.target.closest('.pip-window-controls') || e.target.closest('button')) return;
 
     isDraggingRef.current = true;
-    const rect = windowRef.current.getBoundingClientRect();
-    dragOffsetRef.current = {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+    dragStartRef.current = {
+      mouseX: e.clientX,
+      mouseY: e.clientY,
+      startX: position.x || 0,
+      startY: position.y || 0,
     };
 
     e.preventDefault();
@@ -54,19 +55,21 @@ export default function WindowPanel({
   const handleMouseMove = useCallback((e) => {
     if (!isDraggingRef.current || !onPositionChange || !appId) return;
 
-    const newX = e.clientX - dragOffsetRef.current.x;
-    const newY = e.clientY - dragOffsetRef.current.y;
+    const deltaX = e.clientX - dragStartRef.current.mouseX;
+    const deltaY = e.clientY - dragStartRef.current.mouseY;
 
-    const margin = 16;
-    const taskbarHeight = 48;
-    const maxX = Math.max(margin, window.innerWidth - width - margin);
-    const maxY = Math.max(margin, window.innerHeight - taskbarHeight - 48);
+    const newX = dragStartRef.current.startX + deltaX;
+    const newY = dragStartRef.current.startY + deltaY;
 
-    const clampedX = Math.max(margin, Math.min(newX, maxX));
-    const clampedY = Math.max(margin, Math.min(newY, maxY));
+    // Keep window title bar visible within desktop bounds
+    const maxX = Math.max(0, window.innerWidth - 200);
+    const maxY = Math.max(0, window.innerHeight - 100);
+
+    const clampedX = Math.max(0, Math.min(newX, maxX));
+    const clampedY = Math.max(0, Math.min(newY, maxY));
 
     onPositionChange(appId, clampedX, clampedY);
-  }, [appId, onPositionChange, width]);
+  }, [appId, onPositionChange]);
 
   const handleMouseUp = useCallback(() => {
     isDraggingRef.current = false;
@@ -81,22 +84,10 @@ export default function WindowPanel({
     };
   }, [handleMouseMove, handleMouseUp]);
 
-  // Viewport clamping on render to prevent windows from rendering partially off-screen
-  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
-  const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 768;
-  const margin = 16;
-  const taskbarHeight = 48;
-
-  const maxAllowedX = Math.max(margin, viewportWidth - width - margin);
-  const safeX = Math.max(margin, Math.min(position.x, maxAllowedX));
-
-  const maxAllowedY = Math.max(margin, viewportHeight - taskbarHeight - 64);
-  const safeY = Math.max(margin, Math.min(position.y, maxAllowedY));
-
   const style = {
     position: 'absolute',
-    left: `${safeX}px`,
-    top: `${safeY}px`,
+    left: `${Math.max(0, position.x || 0)}px`,
+    top: `${Math.max(0, position.y || 0)}px`,
     width: `${width}px`,
     maxWidth: 'calc(100vw - 32px)',
     maxHeight: 'calc(100vh - 80px)',

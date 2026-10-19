@@ -184,7 +184,7 @@ export default function App() {
           />
 
           {/* Window Manager Canvas Area */}
-          <div className="pip-windows-canvas" style={{ position: 'relative', flex: 1, minHeight: '100vh', overflow: 'hidden' }}>
+          <div className="pip-windows-canvas" style={{ position: 'relative', flex: 1, minHeight: 'calc(100vh - 80px)', minWidth: 0 }}>
             {openWindowIds.map((appId) => {
               const app = appsData.find((a) => a.id === appId);
               if (!app) return null;

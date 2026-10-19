@@ -17,7 +17,7 @@ export default function Desktop({
     playClickSound();
     setSelectedId(appId);
     if (onIconClick) {
-      onIconClick(appId, 'select');
+      onIconClick(appId, 'open');
     }
   };
 
