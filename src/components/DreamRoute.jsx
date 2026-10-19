@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Sparkles } from 'lucide-react';
+import { Send, Sparkles, Check } from 'lucide-react';
 import WindowPanel from './WindowPanel';
 import { dreamPackets } from '../data/dreamsData';
 import { playClickSound, playChimeSound } from '../utils/audio';
 
-export default function DreamRoute() {
+export default function DreamRoute({ onRouteComplete, isCompleted = false }) {
   const [selectedDream, setSelectedDream] = useState(dreamPackets[0]);
-  const [routeState, setRouteState] = useState('IDLE'); // IDLE, ROUTING, DELIVERED
+  const [routeState, setRouteState] = useState(isCompleted ? 'DELIVERED' : 'IDLE'); // IDLE, ROUTING, DELIVERED
   const [pipStep, setPipStep] = useState(0);
+  const [completed, setCompleted] = useState(isCompleted);
   const timeoutsRef = useRef([]);
 
   useEffect(() => {
@@ -17,17 +18,6 @@ export default function DreamRoute() {
     };
   }, []);
 
-  // SVG Waypoint coordinates on the celestial dream map
-  // Follows the spec diagram:
-  //            🌙 (Moon)
-  //            │
-  //       ─────● (Junction)
-  //      /      \
-  //     ●        ● (Clouds)
-  //    /          \
-  //   ●─────●─────● (Shelf)
-  //          \
-  //           🏠 (Cottage)
   const waypoints = [
     { id: 'moon', x: 250, y: 35, label: 'Moon Relay 🌙', emoji: '🌙' },
     { id: 'junction', x: 250, y: 85, label: 'Little Dipper Gate', emoji: '✦' },
@@ -39,7 +29,6 @@ export default function DreamRoute() {
     { id: 'home', x: 250, y: 275, label: 'Dreamer Bedroom 🏠', emoji: '🏠' },
   ];
 
-  // Specific path traveled by Pip for the delivery
   const deliveryPathIndices = [0, 1, 3, 4, 7];
 
   const handleStartDelivery = () => {
@@ -56,7 +45,9 @@ export default function DreamRoute() {
         playClickSound();
         if (stepIdx === deliveryPathIndices.length - 1) {
           setRouteState('DELIVERED');
+          setCompleted(true);
           playChimeSound();
+          if (onRouteComplete) onRouteComplete();
         }
       }, stepIdx * 800);
       timeoutsRef.current.push(id);
@@ -69,7 +60,7 @@ export default function DreamRoute() {
     <WindowPanel
       title="PROJECT 02 — DREAM DELIVERY ROUTES"
       icon={<Send size={14} color="var(--pip-berry)" />}
-      statusText={`ROUTE ENGINE: ${routeState === 'ROUTING' ? 'DELIVERING...' : routeState === 'DELIVERED' ? 'DELIVERY SUCCESS' : 'ROUTE LOCKED'}`}
+      statusText={`ROUTE ENGINE: ${routeState === 'ROUTING' ? 'DELIVERING...' : routeState === 'DELIVERED' ? '✓ DELIVERY SUCCESS' : 'ROUTE LOCKED'}`}
       className="dream-route-window"
     >
       <div className="dream-route-showcase">
@@ -103,7 +94,6 @@ export default function DreamRoute() {
             viewBox="0 0 500 310"
             aria-label="Celestial Dream Delivery Route Map"
           >
-            {/* Background Constellation Lines */}
             <defs>
               <linearGradient id="routeGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#FCE7A2" />
@@ -198,7 +188,7 @@ export default function DreamRoute() {
             <span className="pip-tag font-mono">{selectedDream.frequency}</span>
           </div>
 
-          <div className="route-actions">
+          <div className="route-actions" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <button
               type="button"
               className="pip-button pip-button-primary dispatch-btn"
@@ -214,6 +204,11 @@ export default function DreamRoute() {
                   : '[ DISPATCH PIP ON DREAM ROUTE ]'}
               </span>
             </button>
+            {completed && (
+              <div className="font-pixel" style={{ color: 'var(--pip-green)', fontSize: '0.75rem', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+                <Check size={12} /> Dream delivery route successfully completed!
+              </div>
+            )}
           </div>
         </div>
       </div>

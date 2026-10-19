@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Sparkles, Lamp } from 'lucide-react';
+import { Sparkles, Lamp, Check } from 'lucide-react';
 import WindowPanel from './WindowPanel';
 import { nightlightsData } from '../data/projectsData';
 import { playClickSound, playChimeSound } from '../utils/audio';
 
-export default function NightlightCollection({ onNightlightGlow }) {
+export default function NightlightCollection({ onNightlightGlow, onNightlightComplete, isCompleted = false }) {
   const [activeLampId, setActiveLampId] = useState('moon-bean');
   const [isLampLit, setIsLampLit] = useState(true);
+  const [completed, setCompleted] = useState(isCompleted);
 
   const handleToggleLamp = (lamp) => {
     playClickSound();
@@ -16,10 +17,12 @@ export default function NightlightCollection({ onNightlightGlow }) {
     } else {
       setActiveLampId(lamp.id);
       setIsLampLit(true);
+      setCompleted(true);
       playChimeSound();
       if (onNightlightGlow) onNightlightGlow(lamp);
+      if (onNightlightComplete) onNightlightComplete();
 
-      // Connect to site night mode if turning on (per Section 13)
+      // Connect to site night mode
       document.documentElement.setAttribute('data-theme', 'midnight');
       localStorage.setItem('pip-dream-theme', 'midnight');
       window.dispatchEvent(new Event('themechange'));
@@ -92,7 +95,7 @@ export default function NightlightCollection({ onNightlightGlow }) {
     <WindowPanel
       title="PROJECT 03 — NIGHTLIGHT COLLECTION"
       icon={<Lamp size={14} color="var(--pip-berry)" />}
-      statusText="AMBIANCE: CONNECTED TO MIDNIGHT NURSERY SKY"
+      statusText={`AMBIANCE: CONNECTED TO MIDNIGHT NURSERY SKY ${completed ? '• ✓ LIT' : ''}`}
       className="nightlight-window"
     >
       <div className="nightlight-collection-grid">
@@ -141,6 +144,12 @@ export default function NightlightCollection({ onNightlightGlow }) {
           );
         })}
       </div>
+
+      {completed && (
+        <div className="font-pixel" style={{ color: 'var(--pip-green)', fontSize: '0.75rem', textAlign: 'center', marginTop: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+          <Check size={12} /> Nightlight nursery ambiance successfully activated!
+        </div>
+      )}
     </WindowPanel>
   );
 }

@@ -147,6 +147,16 @@ export default function StatusBar({
       </div>
 
       <div className="taskbar-right">
+        <div className="taskbar-tray-item font-mono hidden-mobile" title="Early Web Souvenir">
+          <span>VISITOR #0042</span>
+        </div>
+        <div className="taskbar-tray-item font-mono hidden-mobile" title="Best Viewed at 800x600">
+          <span>800x600</span>
+        </div>
+        <div className="taskbar-tray-item font-mono hidden-mobile" title="Last Dream Patch: 10/19/1998">
+          <span>PATCH 10/19/98</span>
+        </div>
+
         <ThemeToggle />
         <SoundToggle />
 

@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
-import { playClickSound } from '../utils/audio';
+import { playClickSound, playChimeSound } from '../utils/audio';
 import { Check, ArrowRight } from 'lucide-react';
+import { dreamMemoryCards } from '../data/dreamMemoryData';
 
 export default function DreamMemory({ onCompleteRoute }) {
-  const allCards = [
-    { id: 'c1', pairId: 'star', symbol: '★', name: 'STAR' },
-    { id: 'c2', pairId: 'star', symbol: '★', name: 'STAR' },
-    { id: 'c3', pairId: 'moon', symbol: '🌙', name: 'MOON' },
-    { id: 'c4', pairId: 'moon', symbol: '🌙', name: 'MOON' },
-    { id: 'c5', pairId: 'cloud', symbol: '☁️', name: 'CLOUD' },
-    { id: 'c6', pairId: 'cloud', symbol: '☁️', name: 'CLOUD' },
-    { id: 'c7', pairId: 'lantern', symbol: '🏮', name: 'LANTERN' },
-    { id: 'c8', pairId: 'lantern', symbol: '🏮', name: 'LANTERN' },
-  ];
-
   const [cards, setCards] = useState(() =>
-    [...allCards].sort(() => Math.random() - 0.5).map((card, idx) => ({ ...card, uniqueKey: `${card.id}-${idx}` }))
+    [...dreamMemoryCards].sort(() => Math.random() - 0.5).map((card, idx) => ({ ...card, uniqueKey: `${card.id}-${idx}` }))
   );
   const [flippedIds, setFlippedIds] = useState([]);
   const [matchedPairIds, setMatchedPairIds] = useState([]);
@@ -34,7 +24,8 @@ export default function DreamMemory({ onCompleteRoute }) {
       setFlippedIds(newFlipped);
 
       if (firstCard.pairId === pairId) {
-        // Match!
+        // Match chime sound
+        playChimeSound();
         const nextMatched = [...matchedPairIds, pairId];
         setMatchedPairIds(nextMatched);
         setFlippedIds([]);
@@ -52,7 +43,7 @@ export default function DreamMemory({ onCompleteRoute }) {
 
   const resetGame = () => {
     playClickSound();
-    setCards([...allCards].sort(() => Math.random() - 0.5).map((card, idx) => ({ ...card, uniqueKey: `${card.id}-${idx}` })));
+    setCards([...dreamMemoryCards].sort(() => Math.random() - 0.5).map((card, idx) => ({ ...card, uniqueKey: `${card.id}-${idx}` })));
     setFlippedIds([]);
     setMatchedPairIds([]);
     setIsComplete(false);
@@ -62,7 +53,7 @@ export default function DreamMemory({ onCompleteRoute }) {
     <div className="dream-memory-container" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div className="section-title-bar">
         <span className="font-retro title-text">DREAM.MEMORY.EXE</span>
-        <span className="font-pixel subtitle-text">[ Match 4 Cozy Dream Pairs ]</span>
+        <span className="font-pixel subtitle-text">[ Match 4 Cozy Dream Pairs • Signal Stability: {matchedPairIds.length * 25}% ]</span>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', padding: '10px 0' }}>
@@ -103,10 +94,10 @@ export default function DreamMemory({ onCompleteRoute }) {
         <div className="wow-delivery-verdict" style={{ background: '#FFFDF7', border: '2px solid var(--pip-green)' }}>
           <div className="verdict-header font-retro">
             <Check size={16} color="var(--pip-green)" />
-            <span>✓ DREAM RECONSTRUCTED SUCCESSFULLY</span>
+            <span>✓ DREAM RECONSTRUCTED SUCCESSFULLY (100% SIGNAL STABILITY)</span>
           </div>
           <p className="verdict-quote font-body">
-            All 4 dream symbols successfully paired! The bedtime frequency is fully stabilized.
+            All 4 cozy dream symbols successfully paired! Bedtime frequency is 100% stabilized.
           </p>
           <button
             type="button"
@@ -124,7 +115,7 @@ export default function DreamMemory({ onCompleteRoute }) {
       ) : (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span className="font-pixel" style={{ fontSize: '1.1rem', color: 'var(--text-muted)' }}>
-            Pairs Matched: {matchedPairIds.length} / 4
+            Pairs Matched: {matchedPairIds.length} / 4 (Stability: {matchedPairIds.length * 25}%)
           </span>
           <button
             type="button"

@@ -15,12 +15,16 @@ import DreamMemory from './components/DreamMemory';
 import { projectsData } from './data/projectsData';
 import { appsData } from './data/appsData';
 import { useWindowManager } from './hooks/useWindowManager';
+import { useDreamMission } from './hooks/useDreamMission';
 
 export default function App() {
   const [hasBooted, setHasBooted] = useState(false);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [focusedGaze, setFocusedGaze] = useState(null);
+
+  // Initialize Dream Mission State Hook
+  const missionState = useDreamMission();
 
   // Initialize Window Manager hook for Phase 1 Desktop OS
   const {
@@ -49,7 +53,6 @@ export default function App() {
     if (action === 'open') {
       openWindow(appId);
     } else {
-      // Single click selects or focuses if open
       if (openWindowIds.includes(appId)) {
         focusWindow(appId);
       }
@@ -72,6 +75,8 @@ export default function App() {
             onEnterDreamspace={() => openWindow('projects')}
             onTriggerEasterEgg={() => setEasterEggOpen(true)}
             focusedGaze={focusedGaze}
+            missionState={missionState}
+            onDeliverDream={missionState.deliverDream}
           />
         );
       case 'projects':
@@ -101,13 +106,35 @@ export default function App() {
           </div>
         );
       case 'dream-memory':
-        return <DreamMemory onCompleteRoute={() => openWindow('dream-route')} />;
+        return (
+          <DreamMemory
+            onCompleteRoute={() => {
+              missionState.completeDreamMemory();
+              openWindow('dream-route');
+            }}
+          />
+        );
       case 'lullaby':
-        return <LullabyLab />;
+        return (
+          <LullabyLab
+            isCompleted={missionState.lullabyComplete}
+            onLullabyComplete={missionState.completeLullaby}
+          />
+        );
       case 'dream-route':
-        return <DreamRoute />;
+        return (
+          <DreamRoute
+            isCompleted={missionState.routeComplete}
+            onRouteComplete={missionState.completeRoute}
+          />
+        );
       case 'nightlights':
-        return <NightlightCollection />;
+        return (
+          <NightlightCollection
+            isCompleted={missionState.nightlightComplete}
+            onNightlightComplete={missionState.completeNightlight}
+          />
+        );
       case 'dream-log':
         return (
           <div>
@@ -182,7 +209,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* 90s Taskbar Fixed Bottom with Start Menu & Dynamic Tabs */}
+        {/* 90s Taskbar Fixed Bottom with Start Menu, Visitor Counter, and Dynamic Tabs */}
         <StatusBar
           openWindowIds={openWindowIds}
           minimizedIds={minimizedIds}
