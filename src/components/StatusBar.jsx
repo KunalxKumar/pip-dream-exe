@@ -2,6 +2,7 @@ import React from 'react';
 import { Heart, Sparkles, Clock, Wifi, Folder, Music, Compass, Moon, Gamepad2, Star, BookOpen } from 'lucide-react';
 import SoundToggle from './SoundToggle';
 import ThemeToggle from './ThemeToggle';
+import StarTrailToggle from './StarTrailToggle';
 import { playClickSound } from '../utils/audio';
 import { appsData } from '../data/appsData';
 
@@ -13,6 +14,8 @@ export default function StatusBar({
   onStartAppOpen,
   onOpenEasterEgg,
   viewportInfo,
+  starTrailEnabled = true,
+  onToggleStarTrail,
 }) {
   const [currentTime, setCurrentTime] = React.useState('23:47');
   const [startMenuOpen, setStartMenuOpen] = React.useState(false);
@@ -93,6 +96,22 @@ export default function StatusBar({
           <div className="pip-start-divider" />
           <button
             type="button"
+            className="pip-start-item"
+            onClick={() => {
+              playClickSound();
+              if (onToggleStarTrail) onToggleStarTrail();
+            }}
+          >
+            <Sparkles size={14} color="var(--pip-yellow)" />
+            <div className="start-item-text">
+              <span className="font-retro">
+                {starTrailEnabled ? '✦ Star Trail: ON' : '✧ Star Trail: OFF'}
+              </span>
+              <span className="font-pixel start-desc">Toggle cursor starlight</span>
+            </div>
+          </button>
+          <button
+            type="button"
             className="pip-start-item pip-start-footer-btn"
             onClick={() => {
               playClickSound();
@@ -162,6 +181,11 @@ export default function StatusBar({
           <span>PATCH 10/19/98</span>
         </div>
 
+        <StarTrailToggle
+          enabled={starTrailEnabled}
+          onToggle={onToggleStarTrail}
+          className="taskbar-trail-toggle"
+        />
         <ThemeToggle className="taskbar-theme-toggle" />
         <SoundToggle className="taskbar-sound-toggle" />
 

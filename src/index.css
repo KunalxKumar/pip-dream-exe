@@ -568,7 +568,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     font-size: 0.68rem;
   }
   .taskbar-theme-toggle,
-  .taskbar-sound-toggle {
+  .taskbar-sound-toggle,
+  .taskbar-trail-toggle {
     display: none !important;
   }
 }
@@ -3864,5 +3865,42 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 [data-theme="midnight"] .entry-meta {
   color: #B5A6C9;
 }
+
+/* ============================================================
+   PIPOS SPARKLE CURSOR TRAIL (STAR TRAIL) STYLES
+   ============================================================ */
+.pip-sparkle-trail-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999999;
+  overflow: hidden;
+}
+
+.sparkle-particle {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  text-shadow: 0 0 4px rgba(252, 231, 162, 0.45);
+  font-family: var(--font-pixel), monospace;
+  will-change: transform, opacity;
+}
+
+/* Responsive adjustment for trail toggle in tablet taskbar */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .taskbar-trail-toggle {
+    padding: 4px 6px !important;
+    font-size: 0.65rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pip-sparkle-trail-container,
+  .sparkle-particle {
+    display: none !important;
+  }
+}
+
 
 

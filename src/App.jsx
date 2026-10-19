@@ -13,11 +13,13 @@ import SystemNotification from './components/SystemNotification';
 import WindowPanel from './components/WindowPanel';
 import DreamMemory from './components/DreamMemory';
 import Dreambook from './components/Dreambook';
+import SparkleTrail from './components/SparkleTrail';
 import { projectsData } from './data/projectsData';
 import { appsData } from './data/appsData';
 import { useWindowManager } from './hooks/useWindowManager';
 import { useDreamMission } from './hooks/useDreamMission';
 import { useViewportMode } from './hooks/useViewportMode';
+import { useStarTrail } from './hooks/useStarTrail';
 import ThemeToggle from './components/ThemeToggle';
 import SoundToggle from './components/SoundToggle';
 import { playClickSound } from './utils/audio';
@@ -30,6 +32,13 @@ export default function App() {
 
   // Initialize Viewport Mode Hook for Responsive Chaos
   const viewportInfo = useViewportMode();
+
+  // Initialize PipOS Star Trail Cursor Hook
+  const {
+    enabled: starTrailEnabled,
+    isEffectiveActive: starTrailActive,
+    toggleStarTrail,
+  } = useStarTrail();
 
   // Initialize Dream Mission State Hook
   const missionState = useDreamMission();
@@ -308,6 +317,9 @@ export default function App() {
           </main>
         </div>
 
+        {/* PipOS Subtle Early-Web Sparkle Cursor Trail */}
+        <SparkleTrail isActive={starTrailActive} />
+
         {/* 90s Taskbar Fixed Bottom with Start Menu, Visitor Counter, and Dynamic Tabs */}
         <StatusBar
           openWindowIds={openWindowIds}
@@ -317,6 +329,8 @@ export default function App() {
           onStartAppOpen={handleStartAppOpen}
           onOpenEasterEgg={() => setEasterEggOpen(true)}
           viewportInfo={viewportInfo}
+          starTrailEnabled={starTrailEnabled}
+          onToggleStarTrail={toggleStarTrail}
         />
 
         {/* System Message Notification Dialog */}
