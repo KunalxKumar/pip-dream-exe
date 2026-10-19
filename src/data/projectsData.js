@@ -6,7 +6,7 @@ export const projectsData = [
     tagline: "Pip's tiny laboratory for creating dreams through sound.",
     description:
       'A low-frequency bedtime synthesizer tuned to Pip’s wind-up unicorn carousel. It generates gentle harmonic waves to untangle busy minds into peaceful slumber.',
-    pipNote: 'Calibrated at 68 BPM and 432 Hz sleep frequencies. Works on restless teddy bears and active thinkers.',
+    pipNote: 'Calibrated at 68 BPM with Pip’s dream tuning: 432 Hz. Works on restless teddy bears and active thinkers.',
     tags: ['Web Audio API', '68 BPM', 'Sleepy Mood', 'Harmonics'],
     meta: {
       tempo: '68 BPM',

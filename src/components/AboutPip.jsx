@@ -64,6 +64,22 @@ export default function AboutPip({ isSleeping = false }) {
         <div className="about-footer-quote font-pixel">
           “Every little dream deserves a soft landing before midnight turns to dawn.”
         </div>
+
+        <div className="about-credits-section font-pixel">
+          <div className="credits-header font-mono">✦ PIPOS ARCHIVAL ATTRIBUTION & CREDITS</div>
+          <div className="credits-row">
+            <span>• ARTWORK: Pip, The Skull Baby (Curated Nursery Portrait)</span>
+          </div>
+          <div className="credits-row">
+            <span>• AUDIO: Procedural Web Audio API Synthesizer (Zero External Audio Files)</span>
+          </div>
+          <div className="credits-row">
+            <span>• LIBRARIES: React, Vite, Framer Motion, Lucide React, Canvas Confetti</span>
+          </div>
+          <div className="credits-row">
+            <span>• CREATED BY: Kunal Kumar (KunalxKumar/pip-dream-exe)</span>
+          </div>
+        </div>
       </div>
     </div>
   );

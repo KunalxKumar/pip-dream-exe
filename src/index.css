@@ -4532,6 +4532,29 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   line-height: 1.4;
 }
 
+.about-credits-section {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  font-size: 0.65rem;
+  color: var(--text-main);
+  opacity: 0.88;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.credits-header {
+  color: var(--pip-yellow, #FCE7A2);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.credits-row {
+  line-height: 1.3;
+}
+
 /* SYSTEM.LOG */
 .system-log-terminal {
   background: #080b10;

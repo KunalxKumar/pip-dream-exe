@@ -29,7 +29,7 @@ Pip is a gentle, cozy, sleepy, and friendly Junior Dream Engineer who works whil
 
 ### 1. `PROJECT 01: LULLABY LAB`
 - **Concept**: Pip's tiny laboratory for creating dreams through sound.
-- **Specification**: Calibrated to **68 BPM** bedtime tempo and **432 Hz** sleep frequencies.
+- **Specification**: Calibrated to **68 BPM** bedtime tempo with **Pip’s dream tuning: 432 Hz**.
 - **Interactive Feature**: Web Audio API music-box synthesizer with individual chime pins (*Cloud, Moon, Star, Beam, Unicorn*) and an automated wind-up lullaby player.
 
 ### 2. `PROJECT 02: DREAM DELIVERY ROUTES`
@@ -44,6 +44,17 @@ Pip is a gentle, cozy, sleepy, and friendly Junior Dream Engineer who works whil
   - `NIGHTLIGHT 02: "STAR PEARL"` (Iridescent starlight bubble)
   - `NIGHTLIGHT 03: "HONEY LANTERN"` (Handheld starfire lantern)
 - **Interactive Feature**: `[ TURN ON ]` button that bathes the desktop in glowing ambient starfire and connects directly to the site's night mode.
+
+---
+
+## 📜 Side Quests Implemented
+
+- **📖 DREAMBOOK.TXT (Live Guestbook)**: Nostalgic 1998 guestbook with local storage persistence, dream stamps, and zero backend required.
+- **✦ SPARKLE CURSOR TRAIL**: Magical early-web starlight particles following pointer movement, bounded 16-DOM pool, zero click blocking, and persisted toggle in taskbar & start menu.
+- **#0042 VISITOR ODOMETER**: 1998 mechanical hit counter with session-aware tab counting, persistent local storage, and rolling reel animation.
+- **👶 ABOUT_PIP.EXE & 📜 SYSTEM.LOG**: Authentic early-web desktop applications showing real-time mission state without fake events.
+- **</> SOURCE.TXT**: In-world View Source artifact accessible via desktop or `ALT + S` keyboard shortcut.
+- **🌙 01:03 FINAL DREAM DELIVERY**: Emotional 6-stage delivery climax and special ending window that tucks Pip into sleep.
 
 ---
 
@@ -115,6 +126,15 @@ Curious dreamers who click Pip 5 times or open `SECRET.KEY` on the desktop unloc
 
 ---
 
+## 🤝 Credits & Attribution
+
+- **Pip, The Skull Baby Artwork**: Curated nursery character concept art by Kunal Kumar.
+- **Audio Architecture**: Procedural Web Audio API sound generator (Zero external mp3/wav files).
+- **Libraries Used**: React, Vite, Framer Motion, Lucide React, Canvas Confetti.
+- **Inspiration**: 1998 personal websites, Geocities nostalgia, and retro desktop computing.
+
+---
+
 ## 🚀 Development & Build
 
 ```bash
@@ -126,4 +146,8 @@ npm run dev
 
 # Production build
 npm run build
+
+# Code linting
+npx oxlint src
 ```
+
