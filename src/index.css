@@ -134,8 +134,8 @@ h1, h2, h3, h4 {
   box-shadow: var(--shadow-window);
   overflow: hidden;
   box-sizing: border-box;
-  max-width: calc(100vw - 32px);
-  max-height: calc(100vh - 80px);
+  max-width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -3117,5 +3117,49 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     max-height: none !important;
     margin-bottom: 16px;
   }
+}
+
+/* ============================================================
+   CENTERED WINDOW WORKSPACE & IDLE PLACEHOLDER
+   ============================================================ */
+.pip-windows-canvas {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.pip-desktop-idle-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px 24px;
+  margin: 60px auto;
+  background: var(--pip-cream);
+  border: 2px dashed var(--pip-brown);
+  border-radius: var(--radius-window);
+  color: var(--pip-brown);
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 500px;
+  box-shadow: 2px 2px 0px var(--pip-brown);
+}
+
+[data-theme="midnight"] .pip-desktop-idle-placeholder {
+  background: #211A2D;
+  border-color: #5A4373;
+  color: #F8EBDD;
+  box-shadow: 2px 2px 0px #0F0B18;
+}
+
+.idle-sparkle {
+  color: var(--pip-yellow);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
 }
 

@@ -31,14 +31,11 @@ export default function App() {
     openWindowIds,
     minimizedIds,
     activeWindowId,
-    zIndices,
-    windowPositions,
     openWindow,
     closeWindow,
     minimizeWindow,
     toggleMinimize,
     focusWindow,
-    updateWindowPosition,
   } = useWindowManager(['hero']);
 
   // Trigger system notification 800ms after boot finishes
@@ -183,34 +180,52 @@ export default function App() {
             onItemLeave={() => setFocusedGaze(null)}
           />
 
-          {/* Window Manager Canvas Area */}
-          <div className="pip-windows-canvas" style={{ position: 'relative', flex: 1, minHeight: 'calc(100vh - 80px)', minWidth: 0 }}>
-            {openWindowIds.map((appId) => {
-              const app = appsData.find((a) => a.id === appId);
-              if (!app) return null;
+          {/* Centered Active Window Workspace */}
+          <main className="pip-windows-canvas" aria-label="Active Desktop Application Workspace">
+            {(() => {
+              const activeApp = appsData.find((a) => a.id === activeWindowId) || appsData[0];
+              const isMinimized = !!minimizedIds[activeWindowId];
+
+              if (isMinimized) {
+                return (
+                  <div className="pip-desktop-idle-placeholder font-pixel">
+                    <span className="idle-sparkle font-retro">✦ PIPOS IDLE ✦</span>
+                    <span style={{ fontSize: '1.2rem' }}>WINDOW MINIMIZED TO TASKBAR</span>
+                    <button
+                      type="button"
+                      className="pip-button pip-button-primary"
+                      onClick={() => toggleMinimize(activeApp.id)}
+                      style={{ marginTop: '8px' }}
+                    >
+                      <span>RESTORE {activeApp.shortLabel}</span>
+                    </button>
+                  </div>
+                );
+              }
 
               return (
                 <WindowPanel
-                  key={appId}
-                  appId={appId}
-                  title={app.title}
-                  icon={<span role="img" aria-hidden="true">{app.emoji}</span>}
-                  isMinimized={!!minimizedIds[appId]}
-                  isActive={activeWindowId === appId}
-                  position={windowPositions[appId] || { x: 80, y: 80 }}
-                  width={app.width}
-                  zIndex={zIndices[appId] || 100}
-                  onFocus={focusWindow}
-                  onPositionChange={updateWindowPosition}
-                  onMinimize={() => minimizeWindow(appId)}
-                  onClose={() => closeWindow(appId)}
-                  statusText={`${app.title} • RUNNING`}
+                  key={activeApp.id}
+                  appId={activeApp.id}
+                  title={activeApp.title}
+                  icon={<span role="img" aria-hidden="true">{activeApp.emoji}</span>}
+                  isMinimized={false}
+                  isActive={true}
+                  width={activeApp.width}
+                  onMinimize={() => minimizeWindow(activeApp.id)}
+                  onClose={() => {
+                    closeWindow(activeApp.id);
+                    if (activeApp.id !== 'hero') {
+                      openWindow('hero');
+                    }
+                  }}
+                  statusText={`${activeApp.title} • ACTIVE`}
                 >
-                  {renderWindowContent(appId)}
+                  {renderWindowContent(activeApp.id)}
                 </WindowPanel>
               );
-            })}
-          </div>
+            })()}
+          </main>
         </div>
 
         {/* 90s Taskbar Fixed Bottom with Start Menu, Visitor Counter, and Dynamic Tabs */}
