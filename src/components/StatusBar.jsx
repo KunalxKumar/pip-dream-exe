@@ -3,6 +3,7 @@ import { Heart, Sparkles, Clock, Wifi, Folder, Music, Compass, Moon, Gamepad2, S
 import SoundToggle from './SoundToggle';
 import ThemeToggle from './ThemeToggle';
 import StarTrailToggle from './StarTrailToggle';
+import VisitorOdometer from './VisitorOdometer';
 import { playClickSound } from '../utils/audio';
 import { appsData } from '../data/appsData';
 
@@ -110,6 +111,9 @@ export default function StatusBar({
               <span className="font-pixel start-desc">Toggle cursor starlight</span>
             </div>
           </button>
+          <div className="pip-start-counter-row">
+            <VisitorOdometer variant="start-menu" showFooter />
+          </div>
           <button
             type="button"
             className="pip-start-item pip-start-footer-btn"
@@ -168,8 +172,8 @@ export default function StatusBar({
       </div>
 
       <div className="taskbar-right">
-        <div className="taskbar-tray-item font-mono tray-visitor-counter" title="Early Web Souvenir #0042">
-          <span>VISITOR #0042</span>
+        <div className="taskbar-tray-item tray-visitor-counter">
+          <VisitorOdometer variant="taskbar" />
         </div>
         <div
           className="taskbar-tray-item font-mono tray-resolution-item"

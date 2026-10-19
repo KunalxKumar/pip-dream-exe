@@ -3902,5 +3902,298 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   }
 }
 
+/* ============================================================
+   STEP 4 — RETRO VISITOR ODOMETER HIT COUNTER STYLES
+   ============================================================ */
+.pip-odometer-tray-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+}
+
+.pip-odometer-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+  opacity: 0.9;
+}
+
+.pip-odometer-display-box {
+  display: inline-flex;
+  align-items: center;
+  background: #090d14;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.85), 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  padding: 1px 4px;
+  height: 19px;
+  box-sizing: border-box;
+}
+
+.pip-odometer-hash {
+  color: var(--pip-yellow, #FCE7A2);
+  font-weight: 800;
+  font-size: 0.72rem;
+  margin-right: 2px;
+  line-height: 1;
+}
+
+.pip-odometer-digits-cluster {
+  display: inline-flex;
+  gap: 1px;
+  align-items: center;
+}
+
+.pip-odometer-digit,
+.pip-odometer-digit-reel {
+  display: inline-block;
+  width: 10px;
+  height: 14px;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #FFFDF7;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1px;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.6);
+  line-height: 14px;
+}
+
+.pip-odometer-reel-strip {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.pip-odometer-reel-strip.is-rolling {
+  animation: pipOdometerRoll 0.65s cubic-bezier(0.2, 0.85, 0.25, 1) forwards;
+  will-change: transform;
+}
+
+.pip-odometer-digit-frame {
+  height: 14px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@keyframes pipOdometerRoll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+/* Start Menu Card Variant */
+.pip-start-counter-row {
+  margin: 3px 6px 6px;
+}
+
+.pip-odometer-start-card {
+  background: #0d121a;
+  border: 1.5px solid var(--border-retro, #2a313d);
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 6px 8px;
+  color: #FFFDF7;
+}
+
+.pip-odometer-start-card .odometer-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.pip-odometer-start-card .odometer-title {
+  color: var(--pip-yellow, #FCE7A2);
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.pip-odometer-start-card .odometer-led-online {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.58rem;
+  color: #7AE582;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.odometer-led-pulse {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #7AE582;
+  box-shadow: 0 0 5px #7AE582;
+  animation: pipOdometerLedPulse 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+@keyframes pipOdometerLedPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.pip-odometer-start-card .pip-odometer-display-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 26px;
+  padding: 2px 8px;
+  background: #05070a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+.pip-odometer-start-card .pip-odometer-hash {
+  font-size: 0.95rem;
+  margin-right: 4px;
+  line-height: 20px;
+}
+
+.pip-odometer-start-card .pip-odometer-digit,
+.pip-odometer-start-card .pip-odometer-digit-reel {
+  width: 14px;
+  height: 20px;
+  font-size: 0.95rem;
+  line-height: 20px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pip-odometer-start-card .pip-odometer-digit-frame {
+  height: 20px;
+  line-height: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pip-odometer-reel-strip.is-rolling {
+    animation: none !important;
+    transform: translateY(-50%) !important;
+  }
+  .odometer-led-pulse {
+    animation: none !important;
+    opacity: 0.9 !important;
+  }
+}
+
+/* ============================================================
+   START MENU RETRO POPUP STYLES
+   ============================================================ */
+.pip-start-menu {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 6px;
+  width: 270px;
+  max-height: 86vh;
+  background: var(--bg-window, #171b26);
+  border: 2px solid var(--border-retro, #fff);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+  border-radius: 4px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+}
+
+.pip-start-banner {
+  padding: 8px 10px;
+  background: linear-gradient(135deg, rgba(252, 231, 162, 0.15), rgba(247, 214, 224, 0.1));
+  border-bottom: 1px solid var(--border-retro, rgba(255, 255, 255, 0.15));
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pip-start-divider {
+  height: 1px;
+  background: var(--border-retro, rgba(255, 255, 255, 0.15));
+  margin: 3px 0;
+}
+
+.pip-start-list {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 4px;
+  overflow-y: auto;
+  max-height: 48vh;
+}
+
+.pip-start-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text-main);
+  cursor: pointer;
+  text-align: left;
+  border-radius: 2px;
+  transition: background 0.1s;
+}
+
+.pip-start-item:hover {
+  background: rgba(252, 231, 162, 0.15);
+}
+
+.start-item-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+
+.start-item-text .font-retro {
+  font-size: 0.82rem;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.start-desc {
+  font-size: 0.62rem;
+  color: var(--text-main);
+  opacity: 0.75;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.pip-start-footer-btn {
+  padding: 6px 10px;
+  background: rgba(252, 231, 162, 0.08);
+}
+
+.pip-start-footer-btn:hover {
+  background: rgba(252, 231, 162, 0.2);
+}
+
 
 
